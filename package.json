@@ -1,0 +1,15 @@
+{
+  "name": "tls-startgg-programs",
+  "version": "1.0.0",
+  "description": "Programs pulling from the start.gg API, made for Toulouse Last Stock's exclusive use",
+  "main": "SLTCalculator.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TwilCynder",
+  "license": "ISC",
+  "type": "module"
+}

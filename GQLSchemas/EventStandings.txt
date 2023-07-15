@@ -1,0 +1,17 @@
+query EventPlacementsQuery($slug: String!){
+  event(slug: $slug){
+    entrants {
+      nodes {
+        initialSeedNum 
+        participants {
+          player {
+            gamerTag
+          }
+        }
+        standing {
+          placement
+        }
+      }
+    }
+  }
+}
