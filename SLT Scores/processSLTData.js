@@ -61,10 +61,12 @@ export function calcTeamScores(players){
         if (team) {
             team.score += player.score;
             team.avg += player.avg;
+            team.activePlayers++;
         } else {
             teams[player.team] = {
                 score: player.score,
-                avg: player.avg
+                avg: player.avg,
+                activePlayers: 1
             }
         }
     }
