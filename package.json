@@ -11,5 +11,8 @@
   },
   "author": "TwilCynder",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "graphql-request": "*"
+  }
 }
