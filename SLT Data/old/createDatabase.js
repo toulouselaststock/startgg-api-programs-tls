@@ -1,5 +1,5 @@
-import { readSchema, readLines, readJSONAsync } from "../lib/lib.js";
-import { client } from "../lib/common.js";
+import { readSchema, readLines, readJSONAsync } from "../../lib/lib.js";
+import { client } from "../../lib/common.js";
 import * as fs from 'fs';
 
 const schema = readSchema(import.meta.url, "../GQLSchemas/PlayerName.txt");
