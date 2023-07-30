@@ -1,1 +1,3 @@
 tournament/stock-o-clock-50/event/1v1-ultimate
+tournament/stock-o-clock-51/event/1v1-ultimate
+tournament/stock-o-clock-52-limit-break/event/1v1-ultimate
