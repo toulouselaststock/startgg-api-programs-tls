@@ -1,4 +1,4 @@
-import {getSPRPoints, getPlacementPoints} from './pointCalculations.js'
+import {getSPRPoints, getPlacementPoints} from './pointCalculations-limitbreak.js'
 
 export function processEntrant(entrant){
     console.log(entrant.participants[0].player.gamerTag);

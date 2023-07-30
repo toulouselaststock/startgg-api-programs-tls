@@ -3,78 +3,286 @@
         "name": "Tofchrist",
         "team": "Tofchrist",
         "performances": [
-            20,
-            18
+            16
         ],
-        "score": 38,
-        "avg": 19
+        "score": 16,
+        "avg": 16
     },
     "69187974": {
         "name": "Elfo",
         "team": "ComteNiark",
         "performances": [
-            20,
-            19
+            18,
+            17
         ],
-        "score": 39,
-        "avg": 19.5
+        "score": 35,
+        "avg": 17.5
     },
     "3d2f6e89": {
         "name": "Maskime",
         "team": "Tofchrist",
         "performances": [
-            22,
-            11,
-            8
+            17,
+            7
         ],
-        "score": 41,
-        "avg": 13.666666666666666
+        "score": 24,
+        "avg": 12
     },
     "88b59e0f": {
         "name": "Ashers",
         "team": "Oxyzz",
         "performances": [
-            28,
-            18
+            14
         ],
-        "score": 46,
-        "avg": 23
+        "score": 14,
+        "avg": 14
     },
     "218ce9c4": {
         "name": "Elloea",
         "team": "Juni",
         "performances": [
-            15,
-            12,
-            9
+            10,
+            6
         ],
-        "score": 36,
-        "avg": 12
+        "score": 16,
+        "avg": 8
     },
     "214a9559": {
         "name": "Silvyan",
         "team": "Tofchrist",
         "performances": [
-            12,
-            11
+            8,
+            7
         ],
-        "score": 23,
-        "avg": 11.5
+        "score": 15,
+        "avg": 7.5
     },
     "59e9576e": {
         "name": "Ponjinge",
         "team": "Juni",
         "performances": [
-            12,
-            12,
-            9
+            8,
+            8
         ],
-        "score": 33,
-        "avg": 11
+        "score": 16,
+        "avg": 8
     },
     "2863f841": {
         "name": "TwilCynder",
         "team": "Tofchrist",
+        "performances": [
+            6,
+            6
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "3ee3fd16": {
+        "name": "Mayah",
+        "team": "ComteNiark",
+        "performances": [
+            6
+        ],
+        "score": 6,
+        "avg": 6
+    },
+    "22f248a1": {
+        "name": "FavelaBoy",
+        "team": "Talinesh",
+        "performances": [
+            8
+        ],
+        "score": 8,
+        "avg": 8
+    },
+    "3645b6b4": {
+        "name": "Alcatrazz",
+        "team": "Talinesh",
+        "performances": [
+            8,
+            8
+        ],
+        "score": 16,
+        "avg": 8
+    },
+    "40f08c7b": {
+        "name": "Neomagix",
+        "team": "Lycan",
+        "performances": [
+            6,
+            6
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "94d76381": {
+        "name": "Énigmes",
+        "team": "Juni",
+        "performances": [
+            25,
+            14
+        ],
+        "score": 39,
+        "avg": 19.5
+    },
+    "1914f35b": {
+        "name": "Sorial",
+        "team": "Lycan",
+        "performances": [
+            8,
+            6
+        ],
+        "score": 14,
+        "avg": 7
+    },
+    "a1bca050": {
+        "name": "Shawn",
+        "team": "KID",
+        "performances": [
+            22
+        ],
+        "score": 22,
+        "avg": 22
+    },
+    "d807d481": {
+        "name": "Gia'",
+        "team": "Rooskas",
+        "performances": [
+            7
+        ],
+        "score": 7,
+        "avg": 7
+    },
+    "de58e30e": {
+        "name": "Saki",
+        "team": "Oxyzz",
+        "performances": [
+            6
+        ],
+        "score": 6,
+        "avg": 6
+    },
+    "4b3f08b1": {
+        "name": "Asahio",
+        "team": "Oxyzz",
+        "performances": [
+            6
+        ],
+        "score": 6,
+        "avg": 6
+    },
+    "5b150a5b": {
+        "name": "Aabi",
+        "team": "Rhubarbe",
+        "performances": [
+            12,
+            8
+        ],
+        "score": 20,
+        "avg": 10
+    },
+    "ec50b51d": {
+        "name": "Big Neco Arc Fan 8000",
+        "team": "Oxyzz",
+        "performances": [
+            9
+        ],
+        "score": 9,
+        "avg": 9
+    },
+    "e47f71b8": {
+        "name": "GrandePerche",
+        "team": "Ganymède",
+        "performances": [
+            11,
+            10
+        ],
+        "score": 21,
+        "avg": 10.5
+    },
+    "b08a54a6": {
+        "name": "Djol",
+        "team": "Rooskas",
+        "performances": [
+            16,
+            9
+        ],
+        "score": 25,
+        "avg": 12.5
+    },
+    "a48540f8": {
+        "name": "Kalamarx",
+        "team": "KID",
+        "performances": [
+            7,
+            5
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "5d8e640c": {
+        "name": "Quche",
+        "team": "Rhubarbe",
+        "performances": [
+            19,
+            5
+        ],
+        "score": 24,
+        "avg": 12
+    },
+    "d196f4f0": {
+        "name": "Croissant Brûlé",
+        "team": "Rhubarbe",
+        "performances": [
+            6,
+            6
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "878f503c": {
+        "name": "Famoflo",
+        "team": "Lycan",
+        "performances": [
+            23,
+            17
+        ],
+        "score": 40,
+        "avg": 20
+    },
+    "16fa8c1b": {
+        "name": "Saora",
+        "team": "Talinesh",
+        "performances": [
+            19,
+            13
+        ],
+        "score": 32,
+        "avg": 16
+    },
+    "c0a0fcb8": {
+        "name": "Shaade",
+        "team": "KID",
+        "performances": [
+            6,
+            6
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "ae3b36ff": {
+        "name": "Tac",
+        "team": "KID",
+        "performances": [
+            7,
+            5
+        ],
+        "score": 12,
+        "avg": 6
+    },
+    "a922f126": {
+        "name": "Blou",
+        "team": "Evolt",
         "performances": [
             9,
             9
@@ -82,253 +290,24 @@
         "score": 18,
         "avg": 9
     },
-    "3ee3fd16": {
-        "name": "Mayah",
-        "team": "ComteNiark",
-        "performances": [
-            9,
-            7
-        ],
-        "score": 16,
-        "avg": 8
-    },
-    "22f248a1": {
-        "name": "FavelaBoy",
-        "team": "Talinesh",
-        "performances": [
-            12,
-            9
-        ],
-        "score": 21,
-        "avg": 10.5
-    },
-    "3645b6b4": {
-        "name": "Alcatrazz",
-        "team": "Talinesh",
-        "performances": [
-            20,
-            12,
-            12
-        ],
-        "score": 44,
-        "avg": 14.666666666666666
-    },
-    "40f08c7b": {
-        "name": "Neomagix",
-        "team": "Lycan",
-        "performances": [
-            9,
-            9,
-            7
-        ],
-        "score": 25,
-        "avg": 8.333333333333334
-    },
-    "94d76381": {
-        "name": "Énigmes",
-        "team": "Juni",
-        "performances": [
-            28,
-            18
-        ],
-        "score": 46,
-        "avg": 23
-    },
-    "1914f35b": {
-        "name": "Sorial",
-        "team": "Lycan",
-        "performances": [
-            12,
-            9
-        ],
-        "score": 21,
-        "avg": 10.5
-    },
-    "a1bca050": {
-        "name": "Shawn",
-        "team": "KID",
-        "performances": [
-            24,
-            12
-        ],
-        "score": 36,
-        "avg": 18
-    },
-    "d807d481": {
-        "name": "Gia'",
-        "team": "Rooskas",
-        "performances": [
-            13,
-            11
-        ],
-        "score": 24,
-        "avg": 12
-    },
-    "de58e30e": {
-        "name": "Saki",
-        "team": "Oxyzz",
-        "performances": [
-            9
-        ],
-        "score": 9,
-        "avg": 9
-    },
-    "4b3f08b1": {
-        "name": "Asahio",
-        "team": "Oxyzz",
-        "performances": [
-            9
-        ],
-        "score": 9,
-        "avg": 9
-    },
-    "5b150a5b": {
-        "name": "Aabi",
-        "team": "Rhubarbe",
-        "performances": [
-            16,
-            12,
-            6
-        ],
-        "score": 34,
-        "avg": 11.333333333333334
-    },
-    "ec50b51d": {
-        "name": "Big Neco Arc Fan 8000",
-        "team": "Oxyzz",
-        "performances": [
-            24,
-            12
-        ],
-        "score": 36,
-        "avg": 18
-    },
-    "e47f71b8": {
-        "name": "GrandePerche",
-        "team": "Ganymède",
-        "performances": [
-            14,
-            13
-        ],
-        "score": 27,
-        "avg": 13.5
-    },
-    "b08a54a6": {
-        "name": "Djol",
-        "team": "Rooskas",
-        "performances": [
-            20,
-            12,
-            12
-        ],
-        "score": 44,
-        "avg": 14.666666666666666
-    },
-    "a48540f8": {
-        "name": "Kalamarx",
-        "team": "KID",
-        "performances": [
-            13,
-            11,
-            8
-        ],
-        "score": 32,
-        "avg": 10.666666666666666
-    },
-    "5d8e640c": {
-        "name": "Quche",
-        "team": "Rhubarbe",
-        "performances": [
-            24,
-            13,
-            8
-        ],
-        "score": 45,
-        "avg": 15
-    },
-    "d196f4f0": {
-        "name": "Croissant Brûlé",
-        "team": "Rhubarbe",
-        "performances": [
-            12,
-            9
-        ],
-        "score": 21,
-        "avg": 10.5
-    },
-    "878f503c": {
-        "name": "Famoflo",
-        "team": "Lycan",
-        "performances": [
-            25,
-            19
-        ],
-        "score": 44,
-        "avg": 22
-    },
-    "16fa8c1b": {
-        "name": "Saora",
-        "team": "Talinesh",
-        "performances": [
-            21,
-            16
-        ],
-        "score": 37,
-        "avg": 18.5
-    },
-    "c0a0fcb8": {
-        "name": "Shaade",
-        "team": "KID",
-        "performances": [
-            9,
-            9,
-            7
-        ],
-        "score": 25,
-        "avg": 8.333333333333334
-    },
-    "ae3b36ff": {
-        "name": "Tac",
-        "team": "KID",
-        "performances": [
-            22,
-            11,
-            8
-        ],
-        "score": 41,
-        "avg": 13.666666666666666
-    },
-    "a922f126": {
-        "name": "Blou",
-        "team": "Evolt",
-        "performances": [
-            18,
-            12,
-            12
-        ],
-        "score": 42,
-        "avg": 14
-    },
     "1a10dc59": {
         "name": "Zang-Fu",
         "team": "Jensen",
         "performances": [
-            20,
             15,
-            15
+            10
         ],
-        "score": 50,
-        "avg": 16.666666666666668
+        "score": 25,
+        "avg": 12.5
     },
     "f0f217c1": {
         "name": "Diop",
         "team": "Jensen",
         "performances": [
-            9,
-            7
+            6
         ],
-        "score": 16,
-        "avg": 8
+        "score": 6,
+        "avg": 6
     },
     "ac0d0951": {
         "name": "H'",
@@ -338,43 +317,39 @@
         "name": "Shuunx7",
         "team": "Rhubarbe",
         "performances": [
-            25,
             23,
-            17
+            21
         ],
-        "score": 65,
-        "avg": 21.666666666666668
+        "score": 44,
+        "avg": 22
     },
     "1a2903e2": {
         "name": "Silfan",
         "team": "Jensen",
         "performances": [
-            12,
-            12
+            9
         ],
-        "score": 24,
-        "avg": 12
+        "score": 9,
+        "avg": 9
     },
     "c8c65ad0": {
         "name": "Aubergine",
         "team": "Tofchrist",
         "performances": [
-            18,
-            12,
-            8
+            14,
+            5
         ],
-        "score": 38,
-        "avg": 12.666666666666666
+        "score": 19,
+        "avg": 9.5
     },
     "1c5ae990": {
         "name": "Jevil",
         "team": "Evolt",
         "performances": [
-            19,
-            12
+            9
         ],
-        "score": 31,
-        "avg": 15.5
+        "score": 9,
+        "avg": 9
     },
     "d03a1a8e": {
         "name": "Hürt",
@@ -382,62 +357,48 @@
     },
     "f8725724": {
         "name": "pictron",
-        "team": "ComteNiark",
-        "performances": [
-            12
-        ],
-        "score": 12,
-        "avg": 12
+        "team": "ComteNiark"
     },
     "84a5bacf": {
         "name": "Communist_Burger",
         "team": "Oxyzz",
         "performances": [
-            12,
-            11
+            7
         ],
-        "score": 23,
-        "avg": 11.5
+        "score": 7,
+        "avg": 7
     },
     "d468077a": {
         "name": "Telitelo",
         "team": "ComteNiark",
         "performances": [
-            13,
-            13,
-            11
+            10,
+            10
         ],
-        "score": 37,
-        "avg": 12.333333333333334
+        "score": 20,
+        "avg": 10
     },
     "32007fda": {
         "name": "Thony",
         "team": "Ganymède",
         "performances": [
-            9,
-            4
+            6
         ],
-        "score": 13,
-        "avg": 6.5
+        "score": 6,
+        "avg": 6
     },
     "eedc4e36": {
         "name": "Atarashī",
         "team": "Ganymède",
         "performances": [
-            22,
-            13
+            10
         ],
-        "score": 35,
-        "avg": 17.5
+        "score": 10,
+        "avg": 10
     },
     "1e998e9f": {
         "name": "Milhaut",
-        "team": "Evolt",
-        "performances": [
-            7
-        ],
-        "score": 7,
-        "avg": 7
+        "team": "Evolt"
     },
     "ba66be5b": {
         "name": "Baptisteuh",
@@ -447,22 +408,20 @@
         "name": "Lilitimus",
         "team": "Rooskas",
         "performances": [
-            16,
-            13,
-            11
+            10,
+            7
         ],
-        "score": 40,
-        "avg": 13.333333333333334
+        "score": 17,
+        "avg": 8.5
     },
     "4a530389": {
         "name": "Anh",
         "team": "Ganymède",
         "performances": [
-            8,
-            6
+            5
         ],
-        "score": 14,
-        "avg": 7
+        "score": 5,
+        "avg": 5
     },
     "709acc51": {
         "name": "Mizu",
@@ -472,36 +431,25 @@
         "name": "YACINE",
         "team": "Juni",
         "performances": [
-            24,
-            18
+            19,
+            14
         ],
-        "score": 42,
-        "avg": 21
+        "score": 33,
+        "avg": 16.5
     },
     "acecd93b": {
         "name": "Maaaars",
         "team": "Talinesh",
         "performances": [
-            9,
-            9,
-            7
+            6,
+            6
         ],
-        "score": 25,
-        "avg": 8.333333333333334
+        "score": 12,
+        "avg": 6
     },
     "25dc1d0c": {
         "name": "Definal",
         "team": "Lycan",
-        "performances": [
-            12,
-            9
-        ],
-        "score": 21,
-        "avg": 10.5
-    },
-    "c3f34b78": {
-        "name": "Innaething",
-        "team": "Juni",
         "performances": [
             8,
             6
@@ -509,86 +457,89 @@
         "score": 14,
         "avg": 7
     },
+    "c3f34b78": {
+        "name": "Innaething",
+        "team": "Juni",
+        "performances": [
+            5
+        ],
+        "score": 5,
+        "avg": 5
+    },
     "4e07b2f0": {
         "name": "Ruynio",
         "team": "Lycan",
         "performances": [
-            17,
             14,
-            12
+            9
         ],
-        "score": 43,
-        "avg": 14.333333333333334
+        "score": 23,
+        "avg": 11.5
     },
     "d2bc4d7c": {
         "name": "DragnirMK",
         "team": "Tofchrist",
         "performances": [
-            9,
-            8
+            5
         ],
-        "score": 17,
-        "avg": 8.5
+        "score": 5,
+        "avg": 5
     },
     "b443f569": {
         "name": "Demyxx",
         "team": "Talinesh",
         "performances": [
-            24,
-            11
+            19
         ],
-        "score": 35,
-        "avg": 17.5
+        "score": 19,
+        "avg": 19
     },
     "ab6ddbc3": {
         "name": "Salti",
         "team": "Jensen",
         "performances": [
-            16,
-            8
+            12
         ],
-        "score": 24,
+        "score": 12,
         "avg": 12
     },
     "ce92d4a8": {
         "name": "Nupelda",
         "team": "Ganymède",
         "performances": [
-            9
+            6
         ],
-        "score": 9,
-        "avg": 9
+        "score": 6,
+        "avg": 6
     },
     "eb01fc3f": {
         "name": "Guéno",
         "team": "Rooskas",
         "performances": [
-            12,
-            9
+            8
         ],
-        "score": 21,
-        "avg": 10.5
+        "score": 8,
+        "avg": 8
     },
     "88d62cb9": {
         "name": "FedEx",
         "team": "ComteNiark",
         "performances": [
-            12,
-            9
+            6,
+            6
         ],
-        "score": 21,
-        "avg": 10.5
+        "score": 12,
+        "avg": 6
     },
     "7c8790a0": {
         "name": "Other",
         "team": "Evolt",
         "performances": [
-            16,
-            16,
-            9
+            12,
+            12
         ],
-        "score": 41,
-        "avg": 13.666666666666666
+        "score": 24,
+        "avg": 12
     },
     "7beabd43": {
         "name": "Korow",
@@ -598,87 +549,25 @@
         "name": "KID",
         "team": "KID",
         "performances": [
-            25,
-            25
+            23,
+            23
         ],
-        "score": 50,
-        "avg": 25
+        "score": 46,
+        "avg": 23
     },
     "a741cfc6": {
         "name": "Oxyzz",
         "team": "Oxyzz",
         "performances": [
-            25,
-            22,
-            22
+            20,
+            20
         ],
-        "score": 69,
-        "avg": 23
+        "score": 40,
+        "avg": 20
     },
     "3c5165ea": {
         "name": "Evolt",
         "team": "Evolt",
-        "performances": [
-            21,
-            20,
-            18
-        ],
-        "score": 59,
-        "avg": 19.666666666666668
-    },
-    "efc3f2d5": {
-        "name": "Juni",
-        "team": "Juni",
-        "performances": [
-            20
-        ],
-        "score": 20,
-        "avg": 20
-    },
-    "54bc8a80": {
-        "name": "ComteNiark",
-        "team": "ComteNiark",
-        "performances": [
-            22,
-            14
-        ],
-        "score": 36,
-        "avg": 18
-    },
-    "caa366ab": {
-        "name": "Lycan",
-        "team": "Lycan",
-        "performances": [
-            21,
-            18,
-            17
-        ],
-        "score": 56,
-        "avg": 18.666666666666668
-    },
-    "af7e1ed1": {
-        "name": "Jensen",
-        "team": "Jensen",
-        "performances": [
-            16
-        ],
-        "score": 16,
-        "avg": 16
-    },
-    "7167d698": {
-        "name": "Ganymède",
-        "team": "Ganymède",
-        "performances": [
-            18,
-            17,
-            16
-        ],
-        "score": 51,
-        "avg": 17
-    },
-    "29f885bf": {
-        "name": "TaLinEsh",
-        "team": "Talinesh",
         "performances": [
             18,
             16
@@ -686,25 +575,80 @@
         "score": 34,
         "avg": 17
     },
+    "efc3f2d5": {
+        "name": "Juni",
+        "team": "Juni",
+        "performances": [
+            18
+        ],
+        "score": 18,
+        "avg": 18
+    },
+    "54bc8a80": {
+        "name": "ComteNiark",
+        "team": "ComteNiark",
+        "performances": [
+            11
+        ],
+        "score": 11,
+        "avg": 11
+    },
+    "caa366ab": {
+        "name": "Lycan",
+        "team": "Lycan",
+        "performances": [
+            16,
+            15
+        ],
+        "score": 31,
+        "avg": 15.5
+    },
+    "af7e1ed1": {
+        "name": "Jensen",
+        "team": "Jensen",
+        "performances": [
+            13
+        ],
+        "score": 13,
+        "avg": 13
+    },
+    "7167d698": {
+        "name": "Ganymède",
+        "team": "Ganymède",
+        "performances": [
+            16,
+            14
+        ],
+        "score": 30,
+        "avg": 15
+    },
+    "29f885bf": {
+        "name": "TaLinEsh",
+        "team": "Talinesh",
+        "performances": [
+            16,
+            13
+        ],
+        "score": 29,
+        "avg": 14.5
+    },
     "fe8e3b95": {
         "name": "Rooskas",
         "team": "Rooskas",
         "performances": [
-            14,
-            12
+            9
         ],
-        "score": 26,
-        "avg": 13
+        "score": 9,
+        "avg": 9
     },
     "d1f355ab": {
         "name": "Rhubarbe",
         "team": "Rhubarbe",
         "performances": [
-            28,
-            19,
-            16
+            26,
+            13
         ],
-        "score": 63,
-        "avg": 21
+        "score": 39,
+        "avg": 19.5
     }
 }
