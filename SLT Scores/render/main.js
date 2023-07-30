@@ -48,7 +48,7 @@
         ` 
 
         ptsHTML += `
-            <div class = "score ${i % 2 == 1 ? "grey" : "black"}">${teamData.score} (${teamData.avg})</div>
+            <div class = "score ${i % 2 == 1 ? "grey" : "black"}">${teamData.score} (${teamData.avg.toFixed(1)})</div>
         `
 
         APHTML += `
