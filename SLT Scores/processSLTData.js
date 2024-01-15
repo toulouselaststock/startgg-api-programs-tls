@@ -36,7 +36,7 @@ export function processEvents(eventResults, players) {
 }
 
 export function calcTeamScores(players){
-    let teams = {}
+    let teams = {};
     let count = 0;
     for (let player of Object.values(players)){
         console.log("Processing player", player.name);
