@@ -1,5 +1,5 @@
-import {client} from './lib/common.js'
-import {readJSONAsync} from './lib/lib.js'
+import {client} from './base/include/lib/common.js'
+import {readJSONAsync} from './base/include/lib/lib.js'
 import fs from 'fs';
 
 import {processEvents, calcTeamScores} from './SLT Scores/processSLTData.js'
