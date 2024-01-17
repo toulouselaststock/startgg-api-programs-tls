@@ -3,6 +3,7 @@ import {createReadStream} from 'fs';
 import { relurl } from '../base/include/lib/dirname.js  ';
 
 const regions = ["HG", "TA", "HO", "AU"];
+const wildcard_results = 3;
 
 const tierPointsFilename = "tierPoints.csv";
 const tiers = [
@@ -56,25 +57,77 @@ function getScore(tierPts, placement){
     return 0;
 }
 
+function Result(score, tournamentName){
+    return {score, tournamentName};
+}
+
 class Player {
     constructor(slug){
         this.slug = slug;
         this.results = {
-            regions: {},
+            regions: {}, 
             wildcard: []
+        }
+    }
+
+    addResult(score, region, tournamentName){
+        let regionResult = this.results[region];
+        if (!regionResult || score > regionResult.score){
+            this.results[region] = Result(score, tournamentName);
+        } else {
+            this.results.wildcard.push(Result(score, tournamentName));
+            this.results.wildcard.sort((a, b) => a.score - b.score);
+            if (this.results.wildcard.length > wildcard_results){
+                this.results.wildcard.pop();
+            }
+        }
+    }
+
+    totalScore(){
+        let total = 0;
+
+        for (let reg of regions){
+            let rResult = this.results.regions[reg];
+            if (rResult) total += rResult.score;
+        }
+        for (let result of this.results.wildcard){
+            total += result.score;
         }
     }
 }
 
+class PlayerFinal {
+    #results;
+    #score;
+    #slug;
+
+    constructor(player){
+        this.#results = player.results;
+        this.#score = player.totalScore;
+        this.#slug = player.slug;
+    }
+}
+
+/**
+ * Returns the player for a given slug, creating it if it doesn't exist
+ * @param {Player} players 
+ * @param {string} slug 
+ * @returns {Player}
+ */
 function getPlayer(players, slug){
     let p = players[slug];
     if (!p) {
-        p = new Player();
+        p = new Player(slug);
         players[slug] = p;
     }
     return p;
 }
 
+/**
+ * Calculates the scores for all entrants of a list of events
+ * @param {any[]} events 
+ * @returns {Player[]} players
+ */
 export function processResults(events){
     if (!tiers.loaded) {
         console.error("Tiers are not loaded yet. Call initializeTiersData() before this function.");
@@ -83,15 +136,18 @@ export function processResults(events){
     let players = {};
 
     for (let ev of events){
-        ev = ev.data;
-        console.log("Processing tournament " + ev.tournament.name);
-        let tier = getTier(ev.numEntrants);
-        console.log(`${ev.numEntrants} entrants (${tier.name} tier)`);
-        for (let standing of ev.standings.nodes){
+        let eventData = ev.data;
+        console.log("Processing tournament " + eventData.tournament.name);
+        let tier = getTier(eventData.numEntrants);
+        console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
+        for (let standing of eventData.standings.nodes){
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];
             let player = getPlayer(players, slug);
             let score = getScore(tier.points, standing.placement);
-            console.log(score);
+            
+            player.addResult(score, ev.region, eventData.tournament.name);
         }
     }
+
+    return players;
 }
