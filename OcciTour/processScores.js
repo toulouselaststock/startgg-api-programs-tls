@@ -1,6 +1,6 @@
 import {parse as parseCSV} from 'csv-parse';
 import {createReadStream} from 'fs';
-import { relurl } from '../base/include/lib/dirname.js  ';
+import {relurl} from '../base/include/lib/dirname.js  ';
 
 const regions = ["HG", "TA", "HO", "AU"];
 const wildcard_results = 3;
@@ -62,8 +62,7 @@ function Result(score, tournamentName){
 }
 
 class Player {
-    constructor(slug){
-        this.slug = slug;
+    constructor(){
         this.results = {
             regions: {}, 
             wildcard: []
@@ -73,7 +72,7 @@ class Player {
     addResult(score, region, tournamentName){
         let regionResult = this.results[region];
         if (!regionResult || score > regionResult.score){
-            this.results[region] = Result(score, tournamentName);
+            this.results.regions[region] = Result(score, tournamentName);
         } else {
             this.results.wildcard.push(Result(score, tournamentName));
             this.results.wildcard.sort((a, b) => a.score - b.score);
@@ -83,6 +82,10 @@ class Player {
         }
     }
 
+    /**
+     * Computes the actual score for this player, following the point calculation rules of OcciTour
+     * @returns {number} the total number of points
+     */
     totalScore(){
         let total = 0;
 
@@ -93,18 +96,8 @@ class Player {
         for (let result of this.results.wildcard){
             total += result.score;
         }
-    }
-}
 
-class PlayerFinal {
-    #results;
-    #score;
-    #slug;
-
-    constructor(player){
-        this.#results = player.results;
-        this.#score = player.totalScore;
-        this.#slug = player.slug;
+        return total
     }
 }
 
@@ -117,7 +110,7 @@ class PlayerFinal {
 function getPlayer(players, slug){
     let p = players[slug];
     if (!p) {
-        p = new Player(slug);
+        p = new Player();
         players[slug] = p;
     }
     return p;
