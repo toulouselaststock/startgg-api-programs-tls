@@ -1,7 +1,7 @@
 import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
 import { readLines } from "../base/include/lib/lib.js";
-import { usageMessage, SingleArgumentParser, parseArguments, OutputModeParser } from "@twilcynder/goombalib-js";
+import { usageMessage, SingleArgumentParser, parseArguments, OutputModeParser, SingleOptionParser, SingleSwitchParser } from "@twilcynder/goombalib-js";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
@@ -12,12 +12,13 @@ if (process.argv.length < 3 ){
     process.exit()
 }
 
-let [outputMode, eventListFilename] = parseArguments(process.argv.slice(2), 
-    new OutputModeParser("log", "occitourScores.csv"),
-    new SingleArgumentParser()    
+let [outputMode, verbose, eventListFilename] = parseArguments(process.argv.slice(2), 
+    new OutputModeParser("string", "occitourScores.csv"),
+    new SingleSwitchParser("-v"),
+    new SingleArgumentParser(),
 )
 
-var eventSlugs = readLines(process.argv[2])
+var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
     .map( line => {
         let split = line.split(" ");
@@ -47,8 +48,19 @@ players.sort((a, b) => b.score - a.score);
 
 let resultString = ""
 
+/**
+ * @param {{regions: {}; wildcard: []}} results 
+ */
+function countResults(results){
+    return Object.keys(results.regions).length + results.wildcard.length;
+}
+
 for (let player of players){
-    resultString += player.name + "\t" + player.score + '\n';
+    if (verbose){
+        resultString += player.name + "\t" + player.score + "\t" + countResults(player.results) + '\n';
+    } else {
+        resultString += player.name + "\t" + player.score + '\n';
+    }
 }
 
 if (outputMode.file){

@@ -134,6 +134,11 @@ export function processResults(events){
         let tier = getTier(eventData.numEntrants);
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
         for (let standing of eventData.standings.nodes){
+            let user = standing.entrant.participants[0].user;
+            if (!user.slug){
+                console.warn("Entrant", standing.entrant.id, "at event", ev.slug, "doesn't have a user account");
+                continue;
+            }
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];
             let player = getPlayer(players, slug);
             let score = getScore(tier.points, standing.placement);
