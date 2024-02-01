@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@twilcynder/goombalib-js':
-    specifier: ^1.2.0
-    version: 1.3.0
+    specifier: ^1.4.0
+    version: 1.4.0
   csv-parse:
     specifier: ^5.5.3
     version: 5.5.3
@@ -25,8 +25,8 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@twilcynder/goombalib-js@1.3.0:
-    resolution: {integrity: sha512-SLbFrYiXOWRW3a0FRrr4ldjMuHx/n6kXqQ5XD8p0ZsN6iaFskpUDY9QuOLKDDTprKRCPJXezIUQg0tD7Bm8ApQ==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.3.0/83b36ca0ca94b51500d073e20c9e30fd96577573}
+  /@twilcynder/goombalib-js@1.4.0:
+    resolution: {integrity: sha512-tQO0LnBWqr3fv3y4rdbarqE14kKOdPNF2AInvVJDzjlK/prme5O/K5Ndsw9knwhXsgelBwP/KdmgsmSbaQspaA==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.4.0/b58e7dff271f55234d3606da3a2e48a24dcee691}
     dev: false
 
   /cross-fetch@3.1.8:
