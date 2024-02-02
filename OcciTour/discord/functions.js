@@ -1,5 +1,6 @@
 import { Client } from "discord.js";
-import { join } from "path"
+import { relurl } from '../../base/include/lib/dirname.js'
+import fs from 'fs';
 
 /**
  * 
@@ -12,7 +13,7 @@ export function processList(listText){
         let [name, score, tournamentsNumber] = arr[i].split("\t");
         result += `${i + 1}. **${name}** : ${score} (${tournamentsNumber} tournois)\n`;
     }
-    console.log(result);
+    return result;
 }
 
 /**
@@ -30,7 +31,7 @@ function loadToken(path){
     path = path ?? import.meta.url;
     let token;
     try {
-        let res = fs.readFileSync(join(path, "secrets.json"));
+        let res = fs.readFileSync(relurl(path, "secrets.json"));
         res = JSON.parse(res);
         if (!res && !res.token) throw "Could not find a token property in secrets.json";
         token = res.token;
@@ -44,11 +45,13 @@ function loadToken(path){
         }
         process.exit(1);
     }
+    return token;
 }
 
-async function initBot(secretsPath){
+export async function initBot(secretsPath){
     let token = loadToken(secretsPath);
     let client = new Client({intents :  ["Guilds", "GuildMessages", "MessageContent", "GuildMessageReactions"]})
     await client.login(token);
     return client;
 }
+
