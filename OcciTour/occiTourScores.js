@@ -1,7 +1,7 @@
 import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
 import { readLines } from "../base/include/lib/lib.js";
-import { usageMessage, SingleArgumentParser, parseArguments, OutputModeParser, SingleOptionParser, SingleSwitchParser } from "@twilcynder/goombalib-js";
+import { usageMessage, SingleArgumentParser, parseArguments, SingleOptionParser, SingleSwitchParser, Parser, PropertiesParser} from "@twilcynder/goombalib-js";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
@@ -12,11 +12,19 @@ if (process.argv.length < 3 ){
     process.exit()
 }
 
-let [outputMode, verbose, eventListFilename] = parseArguments(process.argv.slice(2), 
-    new OutputModeParser("", "occitourScores.csv"),
+let [properties, outputfile, dataOptions, verbose, eventListFilename] = parseArguments(process.argv.slice(2), 
+    new PropertiesParser(),
+    new SingleOptionParser("-f"),
+    new SingleOptionParser("-d"),
     new SingleSwitchParser("-v"),
     new SingleArgumentParser(),
-)
+);
+
+let outputFormat = properties.format ?? "json";
+let outputContent = {
+    "tournamentNumber": dataOptions.contains("n"),
+    "resultsDetail": dataOptions.contains("d")
+}
 
 var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
@@ -35,8 +43,8 @@ let players = processResults(events);
 
 players = await Promise.all(Object.entries(players).map( async ([slug, player] ) => {
     let name = await getPlayerName(client, slug, limiter);
-    console.log("======", name, "======")
-    player.display();
+    //console.log("======", name, "======")
+    //player.display();
     return {
         slug, 
         name: name, 
