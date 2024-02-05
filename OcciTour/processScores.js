@@ -69,16 +69,35 @@ class Player {
         }
     }
 
+    #addToWildCard(result){
+        this.results.wildcard.push(result);
+        this.results.wildcard.sort((a, b) => a.score - b.score);
+        if (this.results.wildcard.length > wildcard_results){
+            this.results.wildcard.pop();
+        }
+    }
+
     addResult(score, region, tournamentName){
-        let regionResult = this.results[region];
-        if (!regionResult || score > regionResult.score){
+        let regionResult = this.results.regions[region];
+        if (!regionResult){
             this.results.regions[region] = Result(score, tournamentName);
+        } else if ( score > regionResult.score){
+            this.results.regions[region] = Result(score, tournamentName);
+            this.#addToWildCard(regionResult);
         } else {
-            this.results.wildcard.push(Result(score, tournamentName));
-            this.results.wildcard.sort((a, b) => a.score - b.score);
-            if (this.results.wildcard.length > wildcard_results){
-                this.results.wildcard.pop();
-            }
+            this.#addToWildCard(Result(score, tournamentName));
+        }
+    }
+
+    display(){
+        console.log("Regions : ")
+        for (let reg of regions){
+            let rResult = this.results.regions[reg];
+            if (rResult) console.log(" - Best result in", reg, " : ", rResult.score, "at", rResult.tournamentName);
+        }
+        console.log("Wildcards : ")
+        for (let result of this.results.wildcard){
+            console.log("- ", result.score, "at", result.tournamentName)
         }
     }
 
@@ -135,8 +154,8 @@ export function processResults(events){
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
         for (let standing of eventData.standings.nodes){
             let user = standing.entrant.participants[0].user;
-            if (!user.slug){
-                console.warn("Entrant", standing.entrant.id, "at event", ev.slug, "doesn't have a user account");
+            if (!user || !user.slug){
+                console.warn("Entrant", standing.entrant.id, `(${standing.entrant.name})`, "at event", ev.slug, "doesn't have a user account associated.");
                 continue;
             }
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];

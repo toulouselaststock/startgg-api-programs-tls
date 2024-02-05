@@ -13,7 +13,7 @@ if (process.argv.length < 3 ){
 }
 
 let [outputMode, verbose, eventListFilename] = parseArguments(process.argv.slice(2), 
-    new OutputModeParser("string", "occitourScores.csv"),
+    new OutputModeParser("", "occitourScores.csv"),
     new SingleSwitchParser("-v"),
     new SingleArgumentParser(),
 )
@@ -34,9 +34,12 @@ await initPromise;
 let players = processResults(events);
 
 players = await Promise.all(Object.entries(players).map( async ([slug, player] ) => {
+    let name = await getPlayerName(client, slug, limiter);
+    console.log("======", name, "======")
+    player.display();
     return {
         slug, 
-        name: await getPlayerName(client, slug, limiter),
+        name: name, 
         score: player.totalScore(),
         results: player.results
     }
@@ -77,3 +80,7 @@ if (outputMode.stdout == "log"){
 } else if (outputMode.stdout == "string"){
     console.log(resultString);  
 }
+
+//NOTES POUR LOUTPUT : 
+//deux paramètres de format (json/csv) et contenu de la data, un paramètre de choix de fichier de sortie pour la data, un toggle pour afficher des logs et un pour afficher la data sur stdout
+//pour le bot on voudra : format json, contenu basique, pas de fichier de sortie, pas de logs mais la data sur stdout  
