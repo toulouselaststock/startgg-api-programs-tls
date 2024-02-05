@@ -7,11 +7,11 @@ import fs from 'fs';
  * @param {string} listText 
  */
 export function processList(listText){
-    let arr = listText.split(/\r?\n/);
+    let arr = listText.split(/\r?\n/).filter(s => !!s);
     let result = "";
     for (let i = 0; i < arr.length; i++){
         let [name, score, tournamentsNumber] = arr[i].split("\t");
-        result += `${i + 1}. **${name}** : ${score} (${tournamentsNumber} tournois)\n`;
+        result += `${i + 1}. **${name}** : ${score} (${tournamentsNumber} tournoi${tournamentsNumber > 1 ? "s" : ""})\n`;
     }
     return result;
 }
