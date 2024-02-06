@@ -1,6 +1,1 @@
-tournament/the-flamin-goat-4-smash-lez-x-mes-esport/event/flamin-goat-4 HO
 tournament/albi-smash-saga-1-edition/event/bracket-1-vs-1-ultimate TA
-tournament/le-parthenon-2/event/1v1-ultimate-full-bo5 HG
-tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23 TA
-tournament/battle-arena-11-esport-n-mes-arena-x-smash-lez/event/battle-arena-11 HO
-tournament/albi-smash-saga-2-edition/event/bracket-1-vs-1-ultimate TA

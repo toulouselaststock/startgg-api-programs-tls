@@ -12,19 +12,28 @@ if (process.argv.length < 3 ){
     process.exit()
 }
 
-let [properties, outputfile, dataOptions, verbose, eventListFilename] = parseArguments(process.argv.slice(2), 
+let [properties, outputfile, dataOptions, silent, printData, eventListFilename] = parseArguments(process.argv.slice(2), 
     new PropertiesParser(),
     new SingleOptionParser("-f"),
     new SingleOptionParser("-d"),
-    new SingleSwitchParser("-v"),
+    new SingleSwitchParser("-s"),
+    new SingleSwitchParser("-p"),
     new SingleArgumentParser(),
 );
 
+printData = printData || !outputfile;
 let outputFormat = properties.format ?? "json";
-let outputContent = {
-    "tournamentNumber": dataOptions.contains("n"),
-    "resultsDetail": dataOptions.contains("d")
-}
+
+let outputContent = dataOptions ? {
+    "tournamentNumber": dataOptions.includes("n"),
+    "resultsDetail": dataOptions.includes("d")
+} : {};
+
+
+let write = process.stdout.write;
+
+if (silent)
+    process.stdout.write = ()=>{};
 
 var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
@@ -57,8 +66,6 @@ limiter.stop();
 
 players.sort((a, b) => b.score - a.score);
 
-let resultString = ""
-
 /**
  * @param {{regions: {}; wildcard: []}} results 
  */
@@ -66,28 +73,36 @@ function countResults(results){
     return Object.keys(results.regions).length + results.wildcard.length;
 }
 
-for (let player of players){
-    if (verbose){
-        resultString += player.name + "\t" + player.score + "\t" + countResults(player.results) + '\n';
-    } else {
-        resultString += player.name + "\t" + player.score + '\n';
+let resultString;
+
+if (outputFormat == "csv"){
+    resultString = "";
+    for (let player of players){
+        if (outputContent.tournamentNumber){
+            resultString += player.name + "\t" + player.score + "\t" + countResults(player.results) + '\n';
+        } else {
+            resultString += player.name + "\t" + player.score + '\n';
+        }
     }
+} else {
+    resultString = JSON.stringify(outputContent.resultsDetail ? players : players.map(player => ({
+        name: player.name,
+        score: player.score,
+        tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined
+    })));
 }
 
-if (outputMode.file){
-    let filename = "./out/" + outputMode.file;
+
+if (outputfile){
+    let filename = "./out/" + outputfile;
     let file = fs.createWriteStream(filename, {encoding: "utf-8"});
 
     file.write(resultString);
 }
 
-if (outputMode.stdout == "log"){
-    for (let player of players){
-        console.log(player.name + "\t" + player.score)
-    }
-} else if (outputMode.stdout == "string"){
-    console.log(resultString);  
-}
+process.stdout.write = write;
+
+if (printData) console.log(resultString);
 
 //NOTES POUR LOUTPUT : 
 //deux paramètres de format (json/csv) et contenu de la data, un paramètre de choix de fichier de sortie pour la data, un toggle pour afficher des logs et un pour afficher la data sur stdout
