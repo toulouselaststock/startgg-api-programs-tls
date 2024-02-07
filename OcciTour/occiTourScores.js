@@ -26,14 +26,15 @@ let outputFormat = properties.format ?? "json";
 
 let outputContent = dataOptions ? {
     "tournamentNumber": dataOptions.includes("n"),
-    "resultsDetail": dataOptions.includes("d")
+    "resultsDetail": dataOptions.includes("d"),
+    "slugOnly": dataOptions.includes("s")
 } : {};
 
 
 let write = process.stdout.write;
-
-if (silent)
+if (silent) {
     process.stdout.write = ()=>{};
+}
 
 var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
@@ -51,12 +52,9 @@ await initPromise;
 let players = processResults(events);
 
 players = await Promise.all(Object.entries(players).map( async ([slug, player] ) => {
-    let name = await getPlayerName(client, slug, limiter);
-    //console.log("======", name, "======")
-    //player.display();
     return {
         slug, 
-        name: name, 
+        name: outputContent.slugOnly ? slug : await getPlayerName(client, slug, limiter), 
         score: player.totalScore(),
         results: player.results
     }
@@ -88,7 +86,8 @@ if (outputFormat == "csv"){
     resultString = JSON.stringify(outputContent.resultsDetail ? players : players.map(player => ({
         name: player.name,
         score: player.score,
-        tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined
+        tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
+        results: outputContent.resultsDetail ? player.results : undefined
     })));
 }
 

@@ -10,17 +10,12 @@ let [inputFile, outputFile, props] = parseArguments(process.argv.slice(2),
 )
 
 console.log("Waiting for result ...")
-let rawText = await loadInput(inputFile);
+let data = await loadInput(inputFile);
 
-console.log("Got something !");
-console.log(rawText)
-
-/*
-let formattedText = processList(rawText);
+let formattedText = processList(data);
 
 if (outputFile){
     fs.writeFileSync("./out/" + outputFile, formattedText);
 } else {
     console.log(formattedText);
 }
-*/

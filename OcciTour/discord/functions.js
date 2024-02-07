@@ -4,13 +4,13 @@ import fs from 'fs';
 
 /**
  * 
- * @param {string} listText 
+ * @param {any[]} playersList 
  */
-export function processList(listText){
-    let arr = listText.split(/\r?\n/).filter(s => !!s);
+export function processList(playersList){
     let result = "";
-    for (let i = 0; i < arr.length; i++){
-        let [name, score, tournamentsNumber] = arr[i].split("\t");
+    console.log(playersList);
+    for (let i = 0; i < playersList.length; i++){
+        let {name, score, tournamentsNumber} = playersList[i];
         result += `${i + 1}. **${name}** : ${score} (${tournamentsNumber} tournoi${tournamentsNumber > 1 ? "s" : ""})\n`;
     }
     return result;
