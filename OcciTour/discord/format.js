@@ -1,14 +1,21 @@
-import { SingleOptionParser, parseArguments } from "@twilcynder/goombalib-js";
+import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynder/goombalib-js";
 import { processList } from "./functions.js";
 import fs from 'fs';
+import { loadInput } from "./loadInput.js";
 
-let [inputFile, outputFile] = parseArguments(process.argv.slice(2),
+let [inputFile, outputFile, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
-    new SingleOptionParser("-o")
+    new SingleOptionParser("-o"),
+    new PropertiesParser()
 )
 
-let rawText = fs.readFileSync(inputFile).toString();
+console.log("Waiting for result ...")
+let rawText = await loadInput(inputFile);
 
+console.log("Got something !");
+console.log(rawText)
+
+/*
 let formattedText = processList(rawText);
 
 if (outputFile){
@@ -16,3 +23,4 @@ if (outputFile){
 } else {
     console.log(formattedText);
 }
+*/

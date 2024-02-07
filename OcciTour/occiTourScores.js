@@ -14,7 +14,7 @@ if (process.argv.length < 3 ){
 
 let [properties, outputfile, dataOptions, silent, printData, eventListFilename] = parseArguments(process.argv.slice(2), 
     new PropertiesParser(),
-    new SingleOptionParser("-f"),
+    new SingleOptionParser("-o"),
     new SingleOptionParser("-d"),
     new SingleSwitchParser("-s"),
     new SingleSwitchParser("-p"),

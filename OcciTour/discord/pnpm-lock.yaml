@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@twilcynder/goombalib-js':
-    specifier: ^1.4.0
-    version: 1.4.0
+    specifier: ^1.5.1
+    version: 1.5.1
   discord.js:
     specifier: ^14.14.1
     version: 14.14.1
@@ -105,8 +105,8 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@twilcynder/goombalib-js@1.4.0:
-    resolution: {integrity: sha512-tQO0LnBWqr3fv3y4rdbarqE14kKOdPNF2AInvVJDzjlK/prme5O/K5Ndsw9knwhXsgelBwP/KdmgsmSbaQspaA==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.4.0/b58e7dff271f55234d3606da3a2e48a24dcee691}
+  /@twilcynder/goombalib-js@1.5.1:
+    resolution: {integrity: sha512-FF1zBKgGj5gzHKt6eHkqPOOULyuyA40P68Op71zEQN9MHS4WBBLW4ri5kJZZs2BtkFeNT+cIkfMV2Mn+ODdANg==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.5.1/f82218b24378ddd84d3ada0e38c40c23822f40b6}
     dev: false
 
   /@types/node@20.11.14:
