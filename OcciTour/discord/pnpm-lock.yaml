@@ -5,9 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@twilcynder/discord-util':
+    specifier: ^1.4.4
+    version: 1.4.4
   '@twilcynder/goombalib-js':
-    specifier: ^1.5.1
-    version: 1.5.1
+    specifier: ^1.5.2
+    version: 1.5.2
   discord.js:
     specifier: ^14.14.1
     version: 14.14.1
@@ -105,12 +108,21 @@ packages:
     engines: {node: '>=v14.0.0', npm: '>=7.0.0'}
     dev: false
 
-  /@twilcynder/goombalib-js@1.5.1:
-    resolution: {integrity: sha512-FF1zBKgGj5gzHKt6eHkqPOOULyuyA40P68Op71zEQN9MHS4WBBLW4ri5kJZZs2BtkFeNT+cIkfMV2Mn+ODdANg==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.5.1/f82218b24378ddd84d3ada0e38c40c23822f40b6}
+  /@twilcynder/discord-util@1.4.4:
+    resolution: {integrity: sha512-OOzyclSwHqI+R4UeDQxxlldE1HnUZWQOOs9Bmwlz8h3c6duLW0SUuJqdDdrJxQyBmRkZooBacU/6A01j0LPDDg==}
+    dependencies:
+      discord.js: 14.14.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
     dev: false
 
-  /@types/node@20.11.14:
-    resolution: {integrity: sha512-w3yWCcwULefjP9DmDDsgUskrMoOy5Z8MiwKHr1FvqGPtx7CvJzQvxD7eKpxNtklQxLruxSXWddyeRtyud0RcXQ==}
+  /@twilcynder/goombalib-js@1.5.2:
+    resolution: {integrity: sha512-6KzyGHBCBvEklFTU5R4aYV+RtlHHWih6R2xBRivHtk0s7t4mixwu3VY6plwW/9Y7GXPFh+pbcUyOmTzAsb6uHw==}
+    dev: false
+
+  /@types/node@20.11.16:
+    resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
     dependencies:
       undici-types: 5.26.5
     dev: false
@@ -118,7 +130,7 @@ packages:
   /@types/ws@8.5.9:
     resolution: {integrity: sha512-jbdrY0a8lxfdTp/+r7Z4CkycbOFN8WX+IOchLJr3juT/xzbJ8URyTVSJ/hvNdadTgM1mnedb47n+Y31GsFnQlg==}
     dependencies:
-      '@types/node': 20.11.14
+      '@types/node': 20.11.16
     dev: false
 
   /@vladfrangu/async_event_emitter@2.2.4:

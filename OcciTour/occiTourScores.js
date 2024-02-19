@@ -103,6 +103,4 @@ process.stdout.write = write;
 
 if (printData) console.log(resultString);
 
-//NOTES POUR LOUTPUT : 
-//deux paramètres de format (json/csv) et contenu de la data, un paramètre de choix de fichier de sortie pour la data, un toggle pour afficher des logs et un pour afficher la data sur stdout
-//pour le bot on voudra : format json, contenu basique, pas de fichier de sortie, pas de logs mais la data sur stdout  
+//node OcciTour/occiTourScores.js -d n OcciTour/events.txt -s | node .\OcciTour\discord\post.js

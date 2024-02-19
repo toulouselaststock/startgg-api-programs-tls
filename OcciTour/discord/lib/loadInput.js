@@ -31,6 +31,5 @@ async function loadInputText(inputFile){
 
 export async function loadInput(inputFile){
     let text = await loadInputText(inputFile);
-    console.log(text);
     return JSON.parse(text);
 }

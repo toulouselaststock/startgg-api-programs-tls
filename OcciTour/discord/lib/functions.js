@@ -1,5 +1,6 @@
 import { Client } from "discord.js";
-import { relurl } from '../../base/include/lib/dirname.js'
+import { relurl } from '../../../base/include/lib/dirname.js'
+import { sendSeparateMessages } from "@twilcynder/discord-util"
 import fs from 'fs';
 
 /**
@@ -10,25 +11,14 @@ export function processList(playersList){
     let result = "";
     console.log(playersList);
     for (let i = 0; i < playersList.length; i++){
-        let {name, score, tournamentsNumber} = playersList[i];
-        result += `${i + 1}. **${name}** : ${score} (${tournamentsNumber} tournoi${tournamentsNumber > 1 ? "s" : ""})\n`;
+        let {name, score, tournamentNumber} = playersList[i];
+        result += `${i + 1}. **${name}** : ${score} (${tournamentNumber} tournoi${tournamentNumber > 1 ? "s" : ""})\n`;
     }
     return result;
 }
 
-/**
- * 
- * @param {Client} client 
- * @param {string} channelID 
- * @param {string} list 
- */
-export async function sendMessage(client, channelID, message){
-    let channel = await client.channels.fetch(channelID);
-    channel.send(message);
-}
-
 function loadToken(path){
-    path = path ?? import.meta.url;
+    path = path ?? relurl(import.meta.url, "..");
     let token;
     try {
         let res = fs.readFileSync(relurl(path, "secrets.json"));
@@ -50,11 +40,32 @@ function loadToken(path){
 
 export async function initBot(secretsPath){
     let token = loadToken(secretsPath);
+    console.log(token)
     let client = new Client({intents :  ["Guilds", "GuildMessages", "MessageContent", "GuildMessageReactions"]})
     await client.login(token);
     return client;
 }   
 
-export function test(){
-    console.log("TESTTTT");
+/**
+ * 
+ * @param {Client} client 
+ * @param {string} channelID 
+ * @param {string} message 
+ */
+export async function sendMessage(client, channelID, message){
+    
+    let channel = await client.channels.fetch(channelID);
+    await sendSeparateMessages(channel, message, 1900);
+}
+
+/**
+ * 
+ * @param {Client} client 
+ * @param {string} channelID 
+ */
+export async function clearChannel(client, channelID){
+    let channel = await client.channels.fetch(channelID);
+    await channel.messages.fetch().then( messages => messages.map(message => {
+        message.delete();
+    }))
 }
