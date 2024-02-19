@@ -40,7 +40,6 @@ function loadToken(path){
 
 export async function initBot(secretsPath){
     let token = loadToken(secretsPath);
-    console.log(token)
     let client = new Client({intents :  ["Guilds", "GuildMessages", "MessageContent", "GuildMessageReactions"]})
     await client.login(token);
     return client;
