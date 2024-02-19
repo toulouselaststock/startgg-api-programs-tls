@@ -152,6 +152,9 @@ export function processResults(events){
         console.log("Processing tournament " + eventData.tournament.name);
         let tier = getTier(eventData.numEntrants);
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
+        if (eventData.standings.nodes.length < 1){
+            console.log("---> No results yet");
+        }
         for (let standing of eventData.standings.nodes){
             let user = standing.entrant.participants[0].user;
             if (!user || !user.slug){

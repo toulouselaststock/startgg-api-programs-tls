@@ -27,7 +27,8 @@ let outputFormat = properties.format ?? "json";
 let outputContent = dataOptions ? {
     "tournamentNumber": dataOptions.includes("n"),
     "resultsDetail": dataOptions.includes("d"),
-    "slugOnly": dataOptions.includes("s")
+    "slugOnly": dataOptions.includes("s"),
+    "slug": dataOptions.includes("u")
 } : {};
 
 
@@ -39,8 +40,8 @@ if (silent) {
 var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
     .map( line => {
-        let split = line.split(" ");
-        return {slug: split[0], region: split[1]};
+        let split = line.split("\t");
+        return {slug: split[1], region: split[0]};
     });
 
 let limiter = new StartGGDelayQueryLimiter();
@@ -84,11 +85,12 @@ if (outputFormat == "csv"){
     }
 } else {
     resultString = JSON.stringify(outputContent.resultsDetail ? players : players.map(player => ({
+        slug: outputContent.slug ? player.slug : undefined,
         name: player.name,
         score: player.score,
         tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
         results: outputContent.resultsDetail ? player.results : undefined
-    })));
+    })), null, outputFormat == "prettyjson" ? 4 : undefined);
 }
 
 

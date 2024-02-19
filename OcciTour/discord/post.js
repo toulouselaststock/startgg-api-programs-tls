@@ -5,13 +5,12 @@ import fs from 'fs/promises'
 
 let channel = "1204905113815351316";
 
-let [inputFile, messageFilename, props] = parseArguments(process.argv.slice(2),
+let [inputFile, messageFilename, previousDataFilename, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
     new SingleOptionParser("-m"),
+    new SingleOptionParser("-p"),
     new PropertiesParser()
 )
-
-let [data, client] = await Promise.all([loadInput(inputFile), initBot()])
 
 let text = "";
 
@@ -23,7 +22,13 @@ if (messageFilename){
     text = message + "\n";
 }
 
-text += (processList(data));
+let [data, client] = await Promise.all([loadInput(inputFile), initBot()])
+
+let previousData;
+if (previousDataFilename){
+    previousData = await fs.readFile(previousDataFilename).then(buf => buf.toString()).then(JSON.parse);
+}
+text += (processList(data, previousData));
 
 await sendMessage(client, channel, text);
 
