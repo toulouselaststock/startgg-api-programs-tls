@@ -40,6 +40,8 @@ function processListComp(playersList, previousPlayerList){
     for (let i = 0; i < playersList.length; i++){
         let {name, score, tournamentNumber, slug} = playersList[i];
 
+        if (score < 1) break;
+
         let prevRank = previousRanks[slug];
         console.log(name, i, prevRank);
 
