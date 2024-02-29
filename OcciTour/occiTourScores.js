@@ -1,28 +1,66 @@
 import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
 import { readLines } from "../base/include/lib/lib.js";
-import { usageMessage, SingleArgumentParser, parseArguments, SingleOptionParser, SingleSwitchParser, Parser, PropertiesParser} from "@twilcynder/goombalib-js";
+import { usageMessage, SingleArgumentParser, parseArguments, SingleOptionParser, SingleSwitchParser, SinglePropertyParser, ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
 import fs from 'fs'
 
+/*
 if (process.argv.length < 3 ){
     console.error(usageMessage("iDsFilename"));
     process.exit()
 }
+*/
 
-let [properties, outputfile, dataOptions, silent, printData, eventListFilename] = parseArguments(process.argv.slice(2), 
-    new PropertiesParser(),
+let parser = new ArgumentsManager()
+    .enableHelpParameter()
+    .addOption("--format", {
+        dest: "outputFormat",
+        description: "The output format. Either json (default) or csv"
+    })
+    .addOption(["-o", "--output_file"],{
+        dest: "outputfile",
+        description: "A file to save the output to. If not specified, the output will be sent to the std output."
+    })
+    .addOption(["-d", "--data"], {
+        dest: "dataOptions",
+        description: "Set of switches describing the content of the output. The value given can contain : \n\
+            n : output will include the tournaments number for each player\n\
+            d : output will include the detail of each result that counted \n\
+            s : output will include the slug instead of the name for each player (makes the program dramatically faster) \n\
+            u : output will include both the slug and the name of each player \
+        "
+    })
+    .addSwitch(["-s", "--silent"], {
+        description: "If present, nothing will be printed except for the actual output"
+    })
+    .addSwitch(["-p", "--printData"], {
+        description: "If present, the output will be printed to stdout even if an output file was specified"
+    })
+    .addParameter("eventListFilename", {
+        description: "Path to a file containing a list of event slugs"
+    }, false)
+    .setAbstract("Calculates the score for every entrant in the Occi'Tour, given a list of included events")
+    
+
+let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename} = parser.parseArguments(process.argv.slice(2));
+
+/*
+let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename] = parseArguments(process.argv.slice(2), 
+    new SingleOptionParser("--format", "json"),
     new SingleOptionParser("-o"),
     new SingleOptionParser("-d"),
     new SingleSwitchParser("-s"),
     new SingleSwitchParser("-p"),
     new SingleArgumentParser(),
 );
+*/
+
+
 
 printData = printData || !outputfile;
-let outputFormat = properties.format ?? "json";
 
 let outputContent = dataOptions ? {
     "tournamentNumber": dataOptions.includes("n"),
@@ -74,6 +112,8 @@ function countResults(results){
 
 let resultString;
 
+
+
 if (outputFormat == "csv"){
     resultString = "";
     for (let player of players){
@@ -84,6 +124,7 @@ if (outputFormat == "csv"){
         }
     }
 } else {
+    console.log("TOURNAMENT NUMBEr", outputContent.tournamentNumber);
     resultString = JSON.stringify(outputContent.resultsDetail ? players : players.map(player => ({
         slug: outputContent.slug ? player.slug : undefined,
         name: player.name,

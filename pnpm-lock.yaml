@@ -5,9 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@twilcynder/goombalib-js':
-    specifier: ^1.5.2
-    version: 1.5.2
+  '@twilcynder/arguments-parser':
+    specifier: ^1.7.1
+    version: 1.7.1
   csv-parse:
     specifier: ^5.5.3
     version: 5.5.3
@@ -25,8 +25,8 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@twilcynder/goombalib-js@1.5.2:
-    resolution: {integrity: sha512-kGzXAAi74AhIcgxkxRkcdK2B3kr4tNeKadCeI76WkGMTaKXKet+QHC+0VUqLZNnAigbAkTPAVSbb3W+C2NZxQA==, tarball: https://npm.pkg.github.com/download/@twilcynder/goombalib-js/1.5.2/90df2605075da12af4eb6f971d62588efe781657}
+  /@twilcynder/arguments-parser@1.7.1:
+    resolution: {integrity: sha512-yilCVj0Bw8vv1H9OzMgyU8quNljAxnsx0/0Itq/xVTxRMt/Zkic0TQqZvuVhdlwmChswWzIoqOiL6JudhFGX7Q==, tarball: https://npm.pkg.github.com/download/@twilcynder/arguments-parser/1.7.1/e0b562144c5b6d8c29abef25dec7abee8bfcde99}
     dev: false
 
   /cross-fetch@3.1.8:

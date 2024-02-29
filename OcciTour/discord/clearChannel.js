@@ -1,6 +1,6 @@
 import { initBot, clearChannel } from './lib/functions.js';
 
-let channel = "1204905113815351316";
+let channel = "1202647423533449297";
 
 let client = await initBot();
 

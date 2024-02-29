@@ -3,7 +3,7 @@ import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynde
 import { loadInput } from "./lib/loadInput.js";
 import fs from 'fs/promises'
 
-let channel = "1204905113815351316";
+let channel = "1202647423533449297";
 
 let [inputFile, messageFilename, previousDataFilename, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
