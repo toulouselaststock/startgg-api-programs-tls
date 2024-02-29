@@ -138,7 +138,7 @@ function getPlayer(players, slug){
 /**
  * Calculates the scores for all entrants of a list of events
  * @param {any[]} events 
- * @returns {Player[]} players
+ * @returns {Object<string, Player>} players
  */
 export function processResults(events){
     if (!tiers.loaded) {
