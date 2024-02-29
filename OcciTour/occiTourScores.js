@@ -52,10 +52,22 @@ await initPromise;
 
 let players = processResults(events);
 
-players = await Promise.all(Object.entries(players).map( async ([slug, player] ) => {
+let current_count = 0;
+let entries = Object.entries(players);
+players = await Promise.all(entries.map( async ([slug, player]) => {
+
+    let name;
+    if (outputContent.slugOnly){
+        name = slug;
+    } else {
+        name = await getPlayerName(client, slug, limiter, true);
+        current_count ++;
+        console.log("Fetched name for player", slug, `(${current_count}/${entries.length})`);
+    }
+
     return {
         slug, 
-        name: outputContent.slugOnly ? slug : await getPlayerName(client, slug, limiter), 
+        name, 
         score: player.totalScore(),
         results: player.results
     }
