@@ -6,6 +6,11 @@ import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
 import fs from 'fs'
+import { NamesCache } from "./namesCache.js";
+
+// =================================================================== //
+// Parser Config
+
 
 let parser = new ArgumentsManager()
     .enableHelpParameter()
@@ -26,6 +31,15 @@ let parser = new ArgumentsManager()
             u : output will include both the slug and the name of each player \
         "
     })
+    .addOption(["--save-names-cache"], {
+        description: "Specifies a file to save player names to"
+    })
+    .addOption(["--load-names-cache"], {
+        description: "Specifies a file to load player names from"
+    })
+    .addOption(["--names-cache"], {
+        description: "Specifies a file to save to and load player names from"
+    })
     .addSwitch(["-s", "--silent"], {
         description: "If present, nothing will be printed except for the actual output"
     })
@@ -36,9 +50,6 @@ let parser = new ArgumentsManager()
         description: "Path to a file containing a list of event slugs"
     }, false)
     .setAbstract("Calculates the score for every entrant in the Occi'Tour, given a list of included events")
-    
-
-let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename} = parser.parseArguments(process.argv.slice(2));
 
 /*
 let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename] = parseArguments(process.argv.slice(2), 
@@ -51,7 +62,17 @@ let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename
 );
 */
 
+// =================================================================== //
+// Parsing arguments
 
+let args = parser.parseArguments(process.argv.slice(2));
+let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename} = args;
+
+const cacheMode = {
+    save: args["save-names-cache"] ?? args["names-cache"],
+    load: args["load-names-cache"] ?? args["names-cache"]
+}
+const useCache = cacheMode.load || cacheMode.save;
 
 printData = printData || !outputfile;
 
@@ -68,6 +89,9 @@ if (silent) {
     process.stdout.write = ()=>{};
 }
 
+// =================================================================== //
+// Loading events
+
 var eventSlugs = readLines(eventListFilename)
     .filter(s => !!s)
     .map( line => {
@@ -75,13 +99,36 @@ var eventSlugs = readLines(eventListFilename)
         return {slug: split[1], region: split[0]};
     });
 
+// ========================================================================== //
+// Loading names cache
+
+let names_cache = new NamesCache();
+let names_cache_promise;
+if (cacheMode.load){
+    names_cache_promise = names_cache.loadFromFile(cacheMode.load);
+}
+
+// ========================================================================== //
+// Loading events and pts point Tiers
+
 let limiter = new StartGGDelayQueryLimiter();
 
 let initPromise = initializeTiersData();
 var events = await Promise.all(eventSlugs.map(async event => ({slug: event.slug, region: event.region, data: await getEventResults(client, event.slug, undefined, limiter).catch(err => {console.error("Slug " + event.slug + " kaput : ", err)})})));
 await initPromise;
+await names_cache_promise;
+
+// ========================================================================== //
+// Calculating scores
 
 let players = processResults(events);
+
+// ========================================================================== //
+// Processing results into sorted player data
+
+function getName(slug){
+    return useCache ? names_cache.getName(client, slug, limiter) : getPlayerName(client, slug, limiter, true);
+}
 
 let current_count = 0;
 let entries = Object.entries(players);
@@ -91,7 +138,7 @@ players = await Promise.all(entries.map( async ([slug, player]) => {
     if (outputContent.slugOnly){
         name = slug;
     } else {
-        name = await getPlayerName(client, slug, limiter, true);
+        name = await getName(slug);
         current_count ++;
         console.log("Fetched name for player", slug, `(${current_count}/${entries.length})`);
     }
@@ -103,10 +150,12 @@ players = await Promise.all(entries.map( async ([slug, player]) => {
         results: player.results
     }
 }))
-
 limiter.stop();
 
 players.sort((a, b) => b.score - a.score);
+
+// ========================================================================== //
+// Producing output
 
 /**
  * @param {{regions: {}; wildcard: []}} results 
@@ -136,6 +185,14 @@ if (outputFormat == "csv"){
     })), null, outputFormat == "prettyjson" ? 4 : undefined);
 }
 
+// ========================================================================== //
+// Saving names cache
+if (cacheMode.save){
+    names_cache.saveToFile(cacheMode.save);
+}
+
+// ========================================================================== //
+// Putting the output somewhere
 
 if (outputfile){
     let filename = "./out/" + outputfile;
