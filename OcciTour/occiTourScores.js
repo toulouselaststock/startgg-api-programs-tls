@@ -7,13 +7,6 @@ import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
 import fs from 'fs'
 
-/*
-if (process.argv.length < 3 ){
-    console.error(usageMessage("iDsFilename"));
-    process.exit()
-}
-*/
-
 let parser = new ArgumentsManager()
     .enableHelpParameter()
     .addOption("--format", {
@@ -124,8 +117,6 @@ function countResults(results){
 
 let resultString;
 
-
-
 if (outputFormat == "csv"){
     resultString = "";
     for (let player of players){
@@ -136,8 +127,7 @@ if (outputFormat == "csv"){
         }
     }
 } else {
-    console.log("TOURNAMENT NUMBEr", outputContent.tournamentNumber);
-    resultString = JSON.stringify(outputContent.resultsDetail ? players : players.map(player => ({
+    resultString = JSON.stringify(players.map(player => ({
         slug: outputContent.slug ? player.slug : undefined,
         name: player.name,
         score: player.score,

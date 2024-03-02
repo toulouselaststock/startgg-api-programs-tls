@@ -3,9 +3,14 @@ import {createReadStream} from 'fs';
 import {relurl} from '../base/include/lib/dirname.js  ';
 
 const regions = ["HG", "TA", "HO", "AU"];
-const wildcard_results = 3;
+const wildcard_results = 5;
 
 const tierPointsFilename = "tierPoints.csv";
+
+/**
+ * @typedef {{name: string, minimum: number, points: number[]}} Tier
+ * @type {Tier[]}
+ */
 const tiers = [
     {name: "S", minimum: 113},
     {name: "A", minimum: 81},
@@ -57,8 +62,15 @@ function getScore(tierPts, placement){
     return 0;
 }
 
-function Result(score, tournamentName){
-    return {score, tournamentName};
+/**
+ * 
+ * @param {string} tournamentName 
+ * @param {number} placement 
+ * @param {Tier} tier 
+ * @returns 
+ */
+function Result(tournamentName, placement, score){
+    return {tournamentName, placement, score};
 }
 
 class Player {
@@ -77,15 +89,23 @@ class Player {
         }
     }
 
-    addResult(score, region, tournamentName){
+    /**
+     * 
+     * @param {string} region 
+     * @param {string} tournamentName 
+     * @param {number} placement 
+     * @param {Tier} tier 
+     */
+    addResult(region, tournamentName, placement, tier){
+        let score = getScore(tier.points, placement);
         let regionResult = this.results.regions[region];
         if (!regionResult){
-            this.results.regions[region] = Result(score, tournamentName);
+            this.results.regions[region] = Result(tournamentName, placement, score);
         } else if ( score > regionResult.score){
-            this.results.regions[region] = Result(score, tournamentName);
+            this.results.regions[region] = Result(tournamentName, placement, score);
             this.#addToWildCard(regionResult);
         } else {
-            this.#addToWildCard(Result(score, tournamentName));
+            this.#addToWildCard(Result(tournamentName, placement, score));
         }
     }
 
@@ -163,9 +183,8 @@ export function processResults(events){
             }
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];
             let player = getPlayer(players, slug);
-            let score = getScore(tier.points, standing.placement);
             
-            player.addResult(score, ev.region, eventData.tournament.name);
+            player.addResult(ev.region, eventData.tournament.name, standing.placement, tier);
         }
     }
 
