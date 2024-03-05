@@ -1,7 +1,7 @@
 import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
 import { readLines } from "../base/include/lib/lib.js";
-import { usageMessage, SingleArgumentParser, parseArguments, SingleOptionParser, SingleSwitchParser, SinglePropertyParser, ArgumentsManager} from "@twilcynder/arguments-parser";
+import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
