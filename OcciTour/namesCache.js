@@ -52,14 +52,13 @@ export class NamesCache {
     }
 
     /**
-     * @param {string[]} slugs 
+     * @param {string[]} names 
      */
-    lookupNames(slugs){
-        let res = new Array(slugs.length);
+    #lookupNames(names, res){
         for (let cachedSlug in this.names){
             let cachedName = this.names[cachedSlug];
-            for (let i = 0; i < slugs.length; i++){
-                if (cachedName == slugs[i]){
+            for (let i = 0; i < names.length; i++){
+                if (cachedName == names[i]){
                     res[i] = cachedSlug;
                 }
             }
@@ -67,4 +66,20 @@ export class NamesCache {
 
         return res;
     }
+
+    /**
+     * @param {string[]} names 
+     */
+    lookupNames(names){
+        return this.#lookupNames(names, new Array(names.length));
+
+    }
+
+    /**
+     * @param {string[]} names 
+     */
+    lookupNamesReplace(names){
+        return this.#lookupNames(names, Array.from(names));
+    }
+
 }

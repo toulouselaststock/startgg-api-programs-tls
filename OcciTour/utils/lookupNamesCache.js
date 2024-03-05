@@ -12,9 +12,11 @@ let {cache_filename, names_filename} = argsManager.parseArguments(process.argv.s
 
 await names_cache.loadFromFile(cache_filename);
 
-var eventSlugs = readLines(names_filename)
+var names = readLines(names_filename)
     .filter(s => !!s)
 
-console.log(cache_filename);
-console.log(names_cache);
-console.log(names_cache.lookupNames(eventSlugs));
+let slugs = names_cache.lookupNames(names);
+
+for (let s of slugs){
+    process.stdout.write(s + "\n");
+}
