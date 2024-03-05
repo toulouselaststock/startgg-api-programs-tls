@@ -1,11 +1,11 @@
 import {parse as parseCSV} from 'csv-parse';
 import {createReadStream} from 'fs';
-import {relurl} from '../base/include/lib/dirname.js  ';
+import {relurl} from '../../base/include/lib/dirname.js  ';
 
 const regions = ["HG", "TA", "HO", "AU"];
 const wildcard_results = 5;
 
-const tierPointsFilename = "tierPoints.csv";
+const tierPointsFilename = "../tierPoints.csv";
 
 /**
  * @typedef {{name: string, minimum: number, points: number[]}} Tier
@@ -169,6 +169,7 @@ export function processResults(events){
 
     for (let ev of events){
         let eventData = ev.data;
+
         console.log("Processing tournament " + eventData.tournament.name);
         let tier = getTier(eventData.numEntrants);
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
@@ -176,6 +177,7 @@ export function processResults(events){
             console.log("---> No results yet");
         }
         for (let standing of eventData.standings.nodes){
+
             let user = standing.entrant.participants[0].user;
             if (!user || !user.slug){
                 console.warn("Entrant", standing.entrant.id, `(${standing.entrant.name})`, "at event", ev.slug, "doesn't have a user account associated.");

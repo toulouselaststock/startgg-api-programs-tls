@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
-import { getPlayerName } from "../base/include/getPlayerName.js";
+import { getPlayerName } from "../../base/include/getPlayerName.js";
 import fs from "fs/promises"
 
 export class NamesCache {
