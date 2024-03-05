@@ -1,5 +1,5 @@
 import { ArgumentsManager } from "@twilcynder/arguments-parser";
-import { NamesCache } from "../namesCache.js";
+import { NamesCache } from "../lib/namesCache.js";
 import { readLines } from "../../base/include/lib/lib.js";
 
 let names_cache = new NamesCache();

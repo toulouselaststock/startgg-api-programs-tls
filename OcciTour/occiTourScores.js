@@ -3,10 +3,11 @@ import { getPlayerName } from "../base/include/getPlayerName.js"
 import { readLines } from "../base/include/lib/lib.js";
 import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
-import { initializeTiersData, processResults } from "./processScores.js";
+import { initializeTiersData, processResults } from "./lib/processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
 import fs from 'fs'
-import { NamesCache } from "./namesCache.js";
+import { NamesCache } from "./lib/namesCache.js";
+import { loadEvent } from "./lib/loadEvents.js";
 
 // =================================================================== //
 // Parser Config
@@ -114,7 +115,11 @@ if (cacheMode.load){
 let limiter = new StartGGDelayQueryLimiter();
 
 let initPromise = initializeTiersData();
-var events = await Promise.all(eventSlugs.map(async event => ({slug: event.slug, region: event.region, data: await getEventResults(client, event.slug, undefined, limiter).catch(err => {console.error("Slug " + event.slug + " kaput : ", err)})})));
+console.log(eventSlugs);
+var events = await Promise.all(eventSlugs.map(async event => ({
+    slug: event.slug, region: event.region, 
+    data: await loadEvent(client, event.slug, limiter)
+})));
 await initPromise;
 await names_cache_promise;
 
