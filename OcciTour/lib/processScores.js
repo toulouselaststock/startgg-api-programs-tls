@@ -155,22 +155,71 @@ function getPlayer(players, slug){
     return p;
 }
 
+function previousMonday(date){
+    let prevMonday = date ? new Date(date) : new Date();
+    prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
+    return prevMonday;
+}
+
+/**
+ * @param {Date} date 
+ * @returns {number}
+ */
+function getPseudoDayOfYear(date){
+    return date.getMonth() * 31 + date.getDate();
+}
+
+/**
+ * @param {Date} d1 
+ * @param {Date} d2 
+ */
+function compareDates(d1, d2){
+    return getPseudoDayOfYear(d1) == getPseudoDayOfYear(d2);
+}
+
+
 /**
  * Calculates the scores for all entrants of a list of events
  * @param {any[]} events 
+ * @param {boolean} exclude_last_week 
  * @returns {Object<string, Player>} players
  */
-export function processResults(events){
+export function processResults(events, exclude_last_week = false){
     if (!tiers.loaded) {
         console.error("Tiers are not loaded yet. Call initializeTiersData() before this function.");
+        return {}
     }
 
+    events = events.reverse();
+
     let players = {};
+
+    let lastMonday;
+    let current_monday = previousMonday(new Date());
 
     for (let ev of events){
         let eventData = ev.data;
 
-        console.log("Processing tournament " + eventData.tournament.name);
+        let date = new Date(eventData.startAt * 1000);
+
+        console.log("Processing tournament " + eventData.tournament.name, "on date", date);
+        
+        if (exclude_last_week){
+            let monday = previousMonday(date);
+
+            if (getPseudoDayOfYear(monday) >= getPseudoDayOfYear(current_monday)){
+                console.log("Skipping because future event");
+                continue;
+            }
+
+            if (!lastMonday) lastMonday = monday;
+
+            if (compareDates(monday, lastMonday)){
+                console.log("Skipping because excluding last week");
+                continue;
+            }
+        }
+
         let tier = getTier(eventData.numEntrants);
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
         if (eventData.standings.nodes.length < 1){

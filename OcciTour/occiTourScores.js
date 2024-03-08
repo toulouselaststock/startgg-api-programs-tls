@@ -70,7 +70,7 @@ let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename
 // Parsing arguments
 
 let args = parser.parseArguments(process.argv.slice(2));
-let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename} = args;
+let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, exclude_last_week} = args;
 
 const cacheMode = {
     save: args["save-names-cache"] ?? args["names-cache"],
@@ -129,7 +129,7 @@ await names_cache_promise;
 // ========================================================================== //
 // Calculating scores
 
-let players = processResults(events);
+let players = processResults(events, exclude_last_week);
 
 // ========================================================================== //
 // Processing results into sorted player data
@@ -142,11 +142,12 @@ let current_count = 0;
 let entries = Object.entries(players);
 players = await Promise.all(entries.map( async ([slug, player]) => {
 
+    let score = player.totalScore();
     let name;
     if (outputContent.slugOnly){
         name = slug;
     } else {
-        name = await getName(slug);
+        name = score > 0 ? await getName(slug) : "noname";
         current_count ++;
         console.log("Fetched name for player", slug, `(${current_count}/${entries.length})`);
     }
@@ -154,7 +155,7 @@ players = await Promise.all(entries.map( async ([slug, player]) => {
     return {
         slug, 
         name, 
-        score: player.totalScore(),
+        score,
         results: player.results
     }
 }))
@@ -214,3 +215,5 @@ process.stdout.write = write;
 if (printData) console.log(resultString);
 
 //node OcciTour/occiTourScores.js -d n OcciTour/events.txt -s | node .\OcciTour\discord\post.js
+
+//node OcciTour/occiTourScores.js OcciTour/events.txt -d dnu -o OcciTour/current.json --names-cache "data/occitourNamesCache$(date +%F).json"
