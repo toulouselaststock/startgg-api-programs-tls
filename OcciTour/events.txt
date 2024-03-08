@@ -7,5 +7,5 @@ TA	tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23
 HG	tournament/montgiscard-warfare-3-glory-road/event/smash-ultimate-1vs1
 HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
 TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
-HO	tournament/yggdrasil-2-1/event/yggdrasil-2
 AU	:./OcciTour/events/oslow.txt
+HO	tournament/yggdrasil-2-1/event/yggdrasil-2

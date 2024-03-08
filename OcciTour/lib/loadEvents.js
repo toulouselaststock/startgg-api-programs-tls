@@ -9,14 +9,13 @@ async function loadFileEvent(filename){
     let lines = await readLinesAsync(filename);
     
     let tournament_name = lines[0];
-    let numEntrants = lines.length - 1;
+    let startAt = new Date(lines[1]).getTime() / 1000 + 3600;
+    let numEntrants = lines.length - 2;
 
     let standings = []
-    for (let i = 1; i < lines.length; i++){
+    for (let i = 2; i < lines.length; i++){
         let slug = lines[i];
-        console.log(slug);
         if (!slug || (slug == "undefined")) continue; 
-        console.log("ouais")
         standings.push({
             placement: i,
             entrant: {
@@ -35,6 +34,7 @@ async function loadFileEvent(filename){
         tournament : {
             name: tournament_name
         },
+        startAt,
         numEntrants,
         standings: {
             nodes: standings

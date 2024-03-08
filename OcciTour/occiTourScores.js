@@ -47,6 +47,9 @@ let parser = new ArgumentsManager()
     .addSwitch(["-p", "--printData"], {
         description: "If present, the output will be printed to stdout even if an output file was specified"
     })
+    .addSwitch(["-e", "--exclude_last_week"], {
+        description: "Excludes the latest week from the ranking (useful to make ranking diffs)"
+    })
     .addParameter("eventListFilename", {
         description: "Path to a file containing a list of event slugs"
     }, false)
