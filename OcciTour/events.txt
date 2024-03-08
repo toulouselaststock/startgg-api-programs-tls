@@ -1,1 +1,11 @@
+HO	tournament/the-flamin-goat-4-smash-lez-x-mes-esport/event/flamin-goat-4
+TA	tournament/albi-smash-saga-1-edition/event/bracket-1-vs-1-ultimate
+HG	tournament/le-parthenon-2/event/1v1-ultimate-full-bo5
+TA	tournament/albi-smash-saga-2-edition/event/bracket-1-vs-1-ultimate
+HO	tournament/battle-arena-11-esport-n-mes-arena-x-smash-lez/event/battle-arena-11
+TA	tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23
+HG	tournament/montgiscard-warfare-3-glory-road/event/smash-ultimate-1vs1
+HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
+TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
+HO	tournament/yggdrasil-2-1/event/yggdrasil-2
 AU	:./OcciTour/events/oslow.txt

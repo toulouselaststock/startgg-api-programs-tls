@@ -24,7 +24,7 @@ function playersListToMap(playersList){
 }
 
 function getRankingMovementEmoji(newRank, oldRank){
-    return oldRank == undefined ? "🆕" : oldRank == newRank ? "⏺️" : oldRank > newRank ? "⬆️" : "⬇️"
+    return oldRank == undefined ? "🆕 (--)" : oldRank == newRank ? "⏺️ (+0)" : oldRank > newRank ? `⬆️ (+${oldRank - newRank})` : `⬇️ (${oldRank - newRank})`
 }
 
 /**

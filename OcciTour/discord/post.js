@@ -1,16 +1,19 @@
 import { initBot, processList, sendMessage } from './lib/functions.js';
-import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynder/goombalib-js";
+import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynder/arguments-parser";
 import { loadInput } from "./lib/loadInput.js";
 import fs from 'fs/promises'
 
-let channel = "1202647423533449297";
+let defaultChannel = "1202647423533449297";
 
-let [inputFile, messageFilename, previousDataFilename, props] = parseArguments(process.argv.slice(2),
+let [inputFile, messageFilename, previousDataFilename, channel, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
     new SingleOptionParser("-m"),
     new SingleOptionParser("-p"),
+    new SingleOptionParser("-c", defaultChannel),
     new PropertiesParser()
 )
+
+console.log(channel);
 
 let text = "";
 
