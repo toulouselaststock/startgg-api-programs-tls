@@ -1,18 +1,16 @@
 import {Client} from 'basic-ftp'
-
-if (process.argv.length < 3){
-    console.error("Usage : node", process.argv[1], "password")
-    process.exit(2)
-}
+import { hiddenQuestion } from './lib.js';
 
 let client = new Client();
+
+let password = process.argv[2] ?? await hiddenQuestion("Mot de passe cloud : ");
 
 try {
     await client.access({
         host: "files.000webhost.com",
         port: 21,
         user: "twilcyndertest",
-        password: process.argv[2]
+        password
     })
 } catch (err){
     console.error("Could not conect to the FTP server. Reason : ");
@@ -22,5 +20,7 @@ try {
 console.log("Connected !");
 
 await client.uploadFromDir("out/Occitour", "data/")
+
+console.log("Finished uploading");
 
 client.close();
