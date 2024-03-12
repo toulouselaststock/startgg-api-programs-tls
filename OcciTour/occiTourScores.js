@@ -149,7 +149,7 @@ players = await Promise.all(entries.map( async ([slug, player]) => {
     } else {
         name = score > 0 ? await getName(slug) : "noname";
         current_count ++;
-        console.log("Fetched name for player", slug, `(${current_count}/${entries.length})`);
+        console.log("Fetched name for player " + slug + ` (${current_count}/${entries.length})`);
     }
 
     return {

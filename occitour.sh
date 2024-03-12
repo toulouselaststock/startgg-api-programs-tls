@@ -1,4 +1,11 @@
-mkdir -p out/Occitour
-node OcciTour/occiTourScores.js OcciTour/events.txt -d dnu -o OcciTour/current.json --names-cache "data/occitourNamesCache$(date +%F).json"
-node OcciTour/occiTourScores.js OcciTour/events.txt -e -d dnu -o OcciTour/previous.json --names-cache "data/occitourNamesCache$(date +%F).json"
-node OcciTour/ftp/main.js
+if [[ "$1" == "discord" ]]
+then
+    ./OcciTour/scripts/discord.sh 1204905113815351316
+    exit 0
+elif [[ "$1" == "upload" ]]
+then
+    ./OcciTour/scripts/upload.sh    
+    exit 0
+fi
+
+./OcciTour/scripts/update.sh
