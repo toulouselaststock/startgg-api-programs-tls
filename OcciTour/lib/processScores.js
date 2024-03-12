@@ -222,6 +222,7 @@ export function processResults(events, exclude_last_week = false){
 
         let tier = getTier(eventData.numEntrants);
         console.log(`${eventData.numEntrants} entrants (${tier.name} tier)`);
+
         if (eventData.standings.nodes.length < 1){
             console.log("---> No results yet");
         }

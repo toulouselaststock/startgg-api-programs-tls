@@ -6,6 +6,9 @@ HO	tournament/battle-arena-11-esport-n-mes-arena-x-smash-lez/event/battle-arena-
 TA	tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23
 HG	tournament/montgiscard-warfare-3-glory-road/event/smash-ultimate-1vs1
 HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
+AU	tournament/lost-in-the-backrooms-4/event/ultimate-singles
 TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
 AU	:./OcciTour/events/oslow.txt
 HO	tournament/yggdrasil-2-1/event/yggdrasil-2
+TA	tournament/aubracket/event/aubracket
+TA	tournament/apollo-one/event/bracket-1-vs-1-ultimate

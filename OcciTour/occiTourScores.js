@@ -152,6 +152,8 @@ players = await Promise.all(entries.map( async ([slug, player]) => {
         console.log("Fetched name for player " + slug + ` (${current_count}/${entries.length})`);
     }
 
+    player.results.wildcard.reverse();
+
     return {
         slug, 
         name, 

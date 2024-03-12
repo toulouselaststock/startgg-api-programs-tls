@@ -15,9 +15,10 @@ async function loadFileEvent(filename){
     let standings = []
     for (let i = 2; i < lines.length; i++){
         let slug = lines[i];
+        slug = slug.replace("\n", "").replace("\r", "")
         if (!slug || (slug == "undefined")) continue; 
         standings.push({
-            placement: i,
+            placement: i - 1,
             entrant: {
                 participants: [
                     {

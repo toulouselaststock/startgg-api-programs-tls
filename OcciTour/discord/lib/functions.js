@@ -6,6 +6,7 @@ import fs from 'fs';
 /**
  * Converts an ordered players list to a map associating each slug with the rank
  * @param {{slug: string}[]} playersList 
+ * @returns {{ [slug: string]: number }}
  */
 function playersListToMap(playersList){
     let previousRank = {};
