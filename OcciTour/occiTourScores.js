@@ -1,6 +1,6 @@
 import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
-import { readLines } from "../base/include/lib/lib.js";
+import { parseCSV, readLines } from "../base/include/lib/lib.js";
 import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
@@ -47,8 +47,9 @@ let parser = new ArgumentsManager()
     .addSwitch(["-p", "--printData"], {
         description: "If present, the output will be printed to stdout even if an output file was specified"
     })
-    .addSwitch(["-e", "--exclude_last_week"], {
-        description: "Excludes the latest week from the ranking (useful to make ranking diffs)"
+    .addSwitch(["-P", "--previous"], {
+        description: "Additionally computes the \"previous\" ranking, i.e. the ranking without the last week (useful to make ranking diffs)",
+        dest: "compute_previous"
     })
     .addParameter("eventListFilename", {
         description: "Path to a file containing a list of event slugs"
@@ -70,7 +71,7 @@ let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename
 // Parsing arguments
 
 let args = parser.parseArguments(process.argv.slice(2));
-let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, exclude_last_week} = args;
+let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, compute_previous} = args;
 
 const cacheMode = {
     save: args["save-names-cache"] ?? args["names-cache"],
@@ -96,12 +97,10 @@ if (silent) {
 // =================================================================== //
 // Loading events
 
-var eventSlugs = readLines(eventListFilename)
-    .filter(s => !!s)
-    .map( line => {
-        let split = line.split("\t");
-        return {slug: split[1], region: split[0]};
-    });
+var eventInfo = parseCSV(fs.readFileSync(eventListFilename).toString(), {separator: "\t"})
+    .map(line => ({date: line[1], thTier: line[2], city: line[3], region: line[4], slug: line[5]}))
+
+    console.log(eventInfo)
 
 // ========================================================================== //
 // Loading names cache
@@ -118,18 +117,16 @@ if (cacheMode.load){
 let limiter = new StartGGDelayQueryLimiter();
 
 let initPromise = initializeTiersData();
-console.log(eventSlugs);
-var events = await Promise.all(eventSlugs.map(async event => ({
-    slug: event.slug, region: event.region, 
-    data: await loadEvent(client, event.slug, limiter)
-})));
+
+var events = await Promise.all(eventInfo.map(async event => Object.assign(event, {data: await loadEvent(client, event.slug, limiter)})));
 await initPromise;
 await names_cache_promise;
 
 // ========================================================================== //
 // Calculating scores
 
-let players = processResults(events, exclude_last_week);
+let result = processResults(events, compute_previous);
+
 
 // ========================================================================== //
 // Processing results into sorted player data
@@ -138,32 +135,45 @@ function getName(slug){
     return useCache ? names_cache.getName(client, slug, limiter) : getPlayerName(client, slug, limiter, true);
 }
 
-let current_count = 0;
-let entries = Object.entries(players);
-players = await Promise.all(entries.map( async ([slug, player]) => {
+/**
+ * @param {import("./lib/processScores.js").PlayerMap} players 
+ * @returns 
+ */
+async function processPlayersList(players){
+    let current_count = 0;
+    let entries = Object.entries(players);
+    let result = await Promise.all(entries.map( async ([slug, player]) => {
+        let score = player.totalScore();
+        let name;
+        if (outputContent.slugOnly){
+            name = slug;
+        } else {
+            name = score > 0 ? await getName(slug) : "noname";
+            current_count ++;
+            console.log("Fetched name for player " + slug + ` (${current_count}/${entries.length})`);
+        }
 
-    let score = player.totalScore();
-    let name;
-    if (outputContent.slugOnly){
-        name = slug;
-    } else {
-        name = score > 0 ? await getName(slug) : "noname";
-        current_count ++;
-        console.log("Fetched name for player " + slug + ` (${current_count}/${entries.length})`);
-    }
+        player.results.wildcard.reverse();
 
-    player.results.wildcard.reverse();
+        return {
+            slug, 
+            name, 
+            score,
+            results: player.results
+        }
+    }));
 
-    return {
-        slug, 
-        name, 
-        score,
-        results: player.results
-    }
-}))
+    result.sort((a, b) => b.score - a.score);
+    return result;
+}
+
+
+let sortedResult = {
+    scores: await processPlayersList(result.scores),
+    previousScores: result.previousScores ? await processPlayersList(result.previousScores) : undefined
+};
+
 limiter.stop();
-
-players.sort((a, b) => b.score - a.score);
 
 // ========================================================================== //
 // Producing output
@@ -173,6 +183,19 @@ players.sort((a, b) => b.score - a.score);
  */
 function countResults(results){
     return Object.keys(results.regions).length + results.wildcard.length;
+}
+
+/**
+ * @param {typeof sortedResult.scores} scores 
+ */
+function makeFinalJSON(scores){
+    return scores.map(player => ({
+        slug: outputContent.slug ? player.slug : undefined,
+        name: player.name,
+        score: player.score,
+        tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
+        results: outputContent.resultsDetail ? player.results : undefined
+    }));
 }
 
 let resultString;
@@ -187,13 +210,13 @@ if (outputFormat == "csv"){
         }
     }
 } else {
-    resultString = JSON.stringify(players.map(player => ({
-        slug: outputContent.slug ? player.slug : undefined,
-        name: player.name,
-        score: player.score,
-        tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
-        results: outputContent.resultsDetail ? player.results : undefined
-    })), null, outputFormat == "prettyjson" ? 4 : undefined);
+    let finalJSON = {
+        tournaments: outputContent.resultsDetail ? result.tournaments : undefined,
+        scores: makeFinalJSON(sortedResult.scores),
+        previousScores: sortedResult.previousScores ? makeFinalJSON(sortedResult.previousScores) : undefined
+    }
+
+    resultString = JSON.stringify(finalJSON, null, outputFormat == "prettyjson" ? 4 : undefined);
 }
 
 // ========================================================================== //

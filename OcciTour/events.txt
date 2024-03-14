@@ -1,14 +1,14 @@
-HO	tournament/the-flamin-goat-4-smash-lez-x-mes-esport/event/flamin-goat-4
-TA	tournament/albi-smash-saga-1-edition/event/bracket-1-vs-1-ultimate
-HG	tournament/le-parthenon-2/event/1v1-ultimate-full-bo5
-TA	tournament/albi-smash-saga-2-edition/event/bracket-1-vs-1-ultimate
-HO	tournament/battle-arena-11-esport-n-mes-arena-x-smash-lez/event/battle-arena-11
-TA	tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23
-HG	tournament/montgiscard-warfare-3-glory-road/event/smash-ultimate-1vs1
-HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
-AU	tournament/lost-in-the-backrooms-4/event/ultimate-singles
-TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
-AU	:./OcciTour/events/oslow.txt
-HO	tournament/yggdrasil-2-1/event/yggdrasil-2
-TA	tournament/aubracket/event/aubracket
-TA	tournament/apollo-one/event/bracket-1-vs-1-ultimate
+Flamin'Goat #4	07/01/2024	A	Montpellier	HO	tournament/the-flamin-goat-4-smash-lez-x-mes-esport/event/flamin-goat-4
+Albi Smash Saga #1	13/01/2024	C	Albi	TA	tournament/albi-smash-saga-1-edition/event/bracket-1-vs-1-ultimate
+Le Parthénon #2	27/01/2024	S	Toulouse	HG	tournament/le-parthenon-2/event/1v1-ultimate-full-bo5
+Albi Smash Saga #2	03/02/2024	C	Albi	TA	tournament/albi-smash-saga-2-edition/event/bracket-1-vs-1-ultimate
+Battle Arena #11	04/02/2024	C	Nîmes	HO	tournament/battle-arena-11-esport-n-mes-arena-x-smash-lez/event/battle-arena-11
+SHIELD Break #23	04/02/2024	C	Montauban	TA	tournament/s-h-i-e-l-d-break-23/event/s-h-i-e-l-d-break-23
+Mongiscard Warfare #3	17/02/2024	B	Montgiscard	HG	tournament/montgiscard-warfare-3-glory-road/event/smash-ultimate-1vs1
+Flamin'Goat #5	18/02/2024	B	Montpellier	HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
+Lost in the Backrooms #4	25/02/2024	C	Narbonne	AU	tournament/lost-in-the-backrooms-4/event/ultimate-singles
+Albi Smash Saga #3	02/03/2024	C	Albi	TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
+Oslow Smash League #Winter	02/03/2024	C	Beziers	AU	:./OcciTour/events/oslow.txt 
+Yggdrasil #2	09/03/2024	A	Montpellier	HO	tournament/yggdrasil-2-1/event/yggdrasil-2
+Aubracket	23/03/2024	C	Rodez	TA	tournament/aubracket/event/aubracket
+Apollo One	07/04/2024	A	Albi	TA	tournament/apollo-one/event/bracket-1-vs-1-ultimate

@@ -28,4 +28,4 @@ for (let player of data){
 
 rl.close();
 
-writeFile(process.argv[3], JSON.stringify(regionMap, null, 4));
+writeFile(process.argv[3], JSON.stringify(regionMap, null, 2));

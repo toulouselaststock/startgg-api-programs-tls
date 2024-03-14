@@ -1,6 +1,7 @@
 import {parse as parseCSV} from 'csv-parse';
 import {createReadStream} from 'fs';
 import {relurl} from '../../base/include/lib/dirname.js  ';
+import { generateUniqueID } from '../../base/include/lib/lib.js';
 
 const regions = ["HG", "TA", "HO", "AU"];
 const wildcard_results = 5;
@@ -175,14 +176,31 @@ function getPseudoDayOfYear(date){
  */
 function compareDates(d1, d2){
     return getPseudoDayOfYear(d1) == getPseudoDayOfYear(d2);
-}
+} 
 
+/**
+ * @typedef {{[slug: string]: Player}} PlayerMap
+ */ 
+
+/**
+ * @typedef {{
+ *  tournaments : {[slug: string]: string},
+ *  scores : T,
+ *  previousScores?  :  T
+ * }} Result<T>
+ * @template  T
+ */ 
+
+function processStanding(scores, slug, event, placement, tier){
+    let player = getPlayer(scores, slug);
+    player.addResult(event.region, event.data.tournament.id, placement, tier);
+}
 
 /**
  * Calculates the scores for all entrants of a list of events
  * @param {any[]} events 
  * @param {boolean} exclude_last_week 
- * @returns {Object<string, Player>} players
+ * @returns {Result<PlayerMap>} players
  */
 export function processResults(events, exclude_last_week = false){
     if (!tiers.loaded) {
@@ -190,9 +208,13 @@ export function processResults(events, exclude_last_week = false){
         return {}
     }
 
-    events = events.reverse();
+    let result = {
+        tournaments: {},
+        scores: {},
+        previousScores: {}
+    }
 
-    let players = {};
+    events = events.reverse();
 
     let lastMonday;
     let current_monday = previousMonday(new Date());
@@ -200,23 +222,29 @@ export function processResults(events, exclude_last_week = false){
     for (let ev of events){
         let eventData = ev.data;
 
-        let date = new Date(eventData.startAt * 1000);
+        eventData.tournament.id = eventData.tournament.id ?? generateUniqueID();
+        result.tournaments[eventData.tournament.id] = eventData.tournament.name;
+
+        let date = new Date(eventData.startAt ? eventData.startAt * 1000 : ev.date);
 
         console.log("Processing tournament " + eventData.tournament.name, "on date", date);
         
+        let count_in_previous;
         if (exclude_last_week){
             let monday = previousMonday(date);
 
             if (getPseudoDayOfYear(monday) >= getPseudoDayOfYear(current_monday)){
-                console.log("Skipping because future event");
-                continue;
-            }
+                console.log("Not counting in previous ranking because future event");
+                count_in_previous = false;
+            } else {
+                if (!lastMonday) lastMonday = monday;
 
-            if (!lastMonday) lastMonday = monday;
-
-            if (compareDates(monday, lastMonday)){
-                console.log("Skipping because excluding last week");
-                continue;
+                if (compareDates(monday, lastMonday)){
+                    console.log("Not counting in previous because excluding last week");
+                    count_in_previous = false;
+                } else {
+                    count_in_previous = true;
+                }
             }
         }
 
@@ -234,11 +262,18 @@ export function processResults(events, exclude_last_week = false){
                 continue;
             }
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];
-            let player = getPlayer(players, slug);
-            
-            player.addResult(ev.region, eventData.tournament.name, standing.placement, tier);
+
+            /*
+            let player = getPlayer(result.scores, slug);
+            player.addResult(ev.region, eventData.tournament.id, standing.placement, tier);
+            */
+
+            processStanding(result.scores, slug, ev, standing.placement, tier);
+            if (count_in_previous){
+                processStanding(result.previousScores, slug, ev, standing.placement, tier);
+            }
         }
     }
 
-    return players;
+    return result;
 }
