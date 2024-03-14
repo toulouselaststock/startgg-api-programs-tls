@@ -51,6 +51,9 @@ let parser = new ArgumentsManager()
         description: "Additionally computes the \"previous\" ranking, i.e. the ranking without the last week (useful to make ranking diffs)",
         dest: "compute_previous"
     })
+    .addOption(["-e", "--export-events"], {
+        description: "Exports the list of events as JSON to the specified path"
+    })
     .addParameter("eventListFilename", {
         description: "Path to a file containing a list of event slugs"
     }, false)
@@ -125,7 +128,7 @@ await names_cache_promise;
 // ========================================================================== //
 // Calculating scores
 
-let result = processResults(events, compute_previous);
+let result = processResults(events, compute_previous, !!args["export-events"]);
 
 
 // ========================================================================== //
@@ -233,6 +236,14 @@ if (outputfile){
     let file = fs.createWriteStream(filename, {encoding: "utf-8"});
 
     file.write(resultString);
+}
+
+if (args["export-events"]){
+    console.log(eventInfo.map(ev => Object.assign(ev, {data: undefined})))
+    let filename = "./out/" + args["export-events"];
+    let file = fs.createWriteStream(filename, {encoding: "utf-8"});
+
+    file.write(JSON.stringify(eventInfo.map(ev => Object.assign(ev, {data: undefined})))); 
 }
 
 process.stdout.write = write;

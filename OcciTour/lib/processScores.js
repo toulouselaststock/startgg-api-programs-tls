@@ -202,7 +202,7 @@ function processStanding(scores, slug, event, placement, tier){
  * @param {boolean} exclude_last_week 
  * @returns {Result<PlayerMap>} players
  */
-export function processResults(events, exclude_last_week = false){
+export function processResults(events, exclude_last_week = false, export_event_info = false){
     if (!tiers.loaded) {
         console.error("Tiers are not loaded yet. Call initializeTiersData() before this function.");
         return {}
@@ -224,6 +224,8 @@ export function processResults(events, exclude_last_week = false){
 
         eventData.tournament.id = eventData.tournament.id ?? generateUniqueID();
         result.tournaments[eventData.tournament.id] = eventData.tournament.name;
+
+        if (export_event_info) ev.name = eventData.tournament.name;
 
         let date = new Date(eventData.startAt ? eventData.startAt * 1000 : ev.date);
 
@@ -253,7 +255,11 @@ export function processResults(events, exclude_last_week = false){
 
         if (eventData.standings.nodes.length < 1){
             console.log("---> No results yet");
+            continue;
         }
+
+        ev.tier = tier.name;
+
         for (let standing of eventData.standings.nodes){
 
             let user = standing.entrant.participants[0].user;
