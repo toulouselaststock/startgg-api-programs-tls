@@ -239,7 +239,6 @@ if (outputfile){
 }
 
 if (args["export-events"]){
-    console.log(eventInfo.map(ev => Object.assign(ev, {data: undefined})))
     let filename = "./out/" + args["export-events"];
     let file = fs.createWriteStream(filename, {encoding: "utf-8"});
 

@@ -1,3 +1,2 @@
 mkdir -p out/Occitour
-node OcciTour/occiTourScores.js OcciTour/events.txt -d dnu -o OcciTour/current.json --names-cache "data/occitourNamesCache$(date +%F).json"
-node OcciTour/occiTourScores.js OcciTour/events.txt -d dnu -o OcciTour/previous.json --names-cache "data/occitourNamesCache$(date +%F).json" -e
+node occitour/occiTourScores.js -d dnu occitour/events.txt -o Occitour/ranking.json --names-cache "data/occitourNamesCache$(date +%F).json" -P -e Occitour/events.json
