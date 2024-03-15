@@ -7,13 +7,16 @@ settings:
 dependencies:
   '@twilcynder/arguments-parser':
     specifier: ^1.7.1
-    version: 1.7.1
+    version: 1.8.2
   csv-parse:
     specifier: ^5.5.3
-    version: 5.5.3
+    version: 5.5.5
   graphql-request:
     specifier: ^6.1.0
     version: 6.1.0(graphql@16.8.1)
+  mime-types:
+    specifier: ^2.1.35
+    version: 2.1.35
 
 packages:
 
@@ -25,8 +28,8 @@ packages:
       graphql: 16.8.1
     dev: false
 
-  /@twilcynder/arguments-parser@1.7.1:
-    resolution: {integrity: sha512-yilCVj0Bw8vv1H9OzMgyU8quNljAxnsx0/0Itq/xVTxRMt/Zkic0TQqZvuVhdlwmChswWzIoqOiL6JudhFGX7Q==, tarball: https://npm.pkg.github.com/download/@twilcynder/arguments-parser/1.7.1/e0b562144c5b6d8c29abef25dec7abee8bfcde99}
+  /@twilcynder/arguments-parser@1.8.2:
+    resolution: {integrity: sha512-1LN0A/vRUVldOUf3seGTLbBwEFs62SAEzMRlqA4uAl2iNjf5UtTbYV1xdSv4q8BNJpow06glHoDQYgOb2MnMDg==, tarball: https://npm.pkg.github.com/download/@twilcynder/arguments-parser/1.8.2/8d9bb464136f11b59936d4aeb3e78472f00b5639}
     dev: false
 
   /cross-fetch@3.1.8:
@@ -37,8 +40,8 @@ packages:
       - encoding
     dev: false
 
-  /csv-parse@5.5.3:
-    resolution: {integrity: sha512-v0KW6C0qlZzoGjk6u5tLmVfyZxNgPGXZsWTXshpAgKVGmGXzaVWGdlCFxNx5iuzcXT/oJN1HHM9DZKwtAtYa+A==}
+  /csv-parse@5.5.5:
+    resolution: {integrity: sha512-erCk7tyU3yLWAhk6wvKxnyPtftuy/6Ak622gOO7BCJ05+TYffnPCJF905wmOQm+BpkX54OdAl8pveJwUdpnCXQ==}
     dev: false
 
   /graphql-request@6.1.0(graphql@16.8.1):
@@ -56,6 +59,18 @@ packages:
   /graphql@16.8.1:
     resolution: {integrity: sha512-59LZHPdGZVh695Ud9lRzPBVTtlX9ZCV150Er2W43ro37wVof0ctenSaskPPjN7lVTIN8mSZt8PHUNKZuNQUuxw==}
     engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
+    dev: false
+
+  /mime-db@1.52.0:
+    resolution: {integrity: sha512-sPU4uV7dYlvtWJxwwxHD0PuihVNiE7TyAbQ5SWxDCB9mUYvOgroQOwYQQOKPJ8CIbE+1ETVlOoK1UC2nU3gYvg==}
+    engines: {node: '>= 0.6'}
+    dev: false
+
+  /mime-types@2.1.35:
+    resolution: {integrity: sha512-ZDY+bPm5zTTF+YpCrAU9nK0UgICYPT0QtT1NZWFv4s++TNkcgVaT0g6+4R2uI4MjQjzysHB1zxuWL50hzaeXiw==}
+    engines: {node: '>= 0.6'}
+    dependencies:
+      mime-db: 1.52.0
     dev: false
 
   /node-fetch@2.7.0:

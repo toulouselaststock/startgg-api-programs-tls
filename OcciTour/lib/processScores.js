@@ -225,7 +225,10 @@ export function processResults(events, exclude_last_week = false, export_event_i
         eventData.tournament.id = eventData.tournament.id ?? generateUniqueID();
         result.tournaments[eventData.tournament.id] = eventData.tournament.name;
 
-        if (export_event_info) ev.name = eventData.tournament.name;
+        if (export_event_info) {
+            ev.name = eventData.tournament.name;
+            ev.id = eventData.tournament.id;
+        }
 
         let date = new Date(eventData.startAt ? eventData.startAt * 1000 : ev.date);
 
