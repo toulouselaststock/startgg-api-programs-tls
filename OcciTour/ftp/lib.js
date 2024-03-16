@@ -61,7 +61,7 @@ export function uploadTracker(totalfiles){
         currentFile++;
         previousFile = info.name;
       }
-      console.log(`${currentFile}/${totalfiles} (${ Math.floor(currentFile / totalfiles * 100)}%) : Uploading`, info.name, `(${info.bytesOverall} bytes uploaded)`);
+      console.log(`${currentFile}/${totalfiles} (${ Math.floor((currentFile - 1) / totalfiles * 100)}%) : Uploading`, info.name, `(${info.bytesOverall} bytes uploaded)`);
   };
 }
 

@@ -32,12 +32,18 @@ let imgInfos = await Promise.all(data.map( async event => {
 
 limiter.stop();
 
+let typeMap = {}
 await Promise.all(imgInfos.map(async event => {
     if (!event) return;
     console.log("Downloading logo for event", event.slug)
     let blob = await fetch(event.url)
         .then(res => res.blob())
 
-    let filename = "./out/" + outDir + "/" + event.id + "." + extension(blob.type);
+    let ext = extension(blob.type);
+    typeMap[event.id] = ext
+
+    let filename = "./out/" + outDir + "/" + event.id + "." + ext;
     fs.writeFileSync(filename, Buffer.from(await blob.arrayBuffer()));
 }))
+
+fs.writeFileSync("./out/" + outDir + "/" + "imageTypes.json", JSON.stringify(typeMap));
