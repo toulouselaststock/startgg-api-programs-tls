@@ -1,4 +1,6 @@
-import readline from 'readline'
+import readline from 'readline';
+import fs from 'fs';
+import path from 'path';
 
 export function hiddenQuestion(query) {
     return new Promise((resolve, reject) => {
@@ -31,3 +33,35 @@ export function hiddenQuestion(query) {
         });
     });
 } 
+
+export function countFiles(dir){
+  let count = 0;
+  fs.readdirSync(dir).forEach(filename => {
+    let absolute = path.join(dir, filename);
+    if (fs.statSync(absolute).isDirectory()){
+      count += countFiles(absolute);
+    } else {
+      count++;
+    }
+  })
+
+  return count;
+}
+
+/**
+ * If you have multiple files with the same filename it wont work properly. Fuck it.
+ * @param {number} totalfiles 
+ * @returns {import('basic-ftp/dist/ProgressTracker').ProgressHandler}
+ */
+export function uploadTracker(totalfiles){
+  let currentFile = 0;
+  let previousFile;
+  return info => {
+      if (previousFile != info.name){
+        currentFile++;
+        previousFile = info.name;
+      }
+      console.log(`${currentFile}/${totalfiles} (${ Math.floor(currentFile / totalfiles * 100)}%) : Uploading`, info.name, `(${info.bytesOverall} bytes uploaded)`);
+  };
+}
+

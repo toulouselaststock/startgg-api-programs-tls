@@ -1,7 +1,8 @@
 import {Client} from 'basic-ftp'
-import { hiddenQuestion } from './lib.js';
+import { countFiles, hiddenQuestion, uploadTracker } from './lib.js';
 
 let client = new Client();
+client.trackProgress(uploadTracker(countFiles("out/Occitour")))
 
 let password = process.argv[2] ?? await hiddenQuestion("Mot de passe cloud : ");
 
