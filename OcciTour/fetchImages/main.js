@@ -10,7 +10,7 @@ if (process.argv.length < 3){
     process.exit(1)
 }
 
-let outDir = process.argv[3] ?? "occitour/logos"
+let outDir = process.argv[3] ?? "occitour-logos/"
 
 /**@type {any[]} */
 let data = JSON.parse(fs.readFileSync(process.argv[2]).toString());
