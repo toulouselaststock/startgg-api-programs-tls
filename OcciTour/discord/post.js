@@ -13,7 +13,7 @@ let [inputFile, messageFilename, previousDataFilename, channel, props] = parseAr
     new PropertiesParser()
 )
 
-console.log(channel);
+console.log("Channel : ", channel);
 
 let text = "";
 
@@ -27,11 +27,10 @@ if (messageFilename){
 
 let [data, client] = await Promise.all([loadInput(inputFile), initBot()])
 
-let previousData;
-if (previousDataFilename){
-    previousData = await fs.readFile(previousDataFilename).then(buf => buf.toString()).then(JSON.parse);
-}
-text += (processList(data, previousData));
+let scores = data.scores;
+let previousData = data.previousScores;
+
+text += (processList(scores, previousData));
 
 await sendMessage(client, channel, text);
 
