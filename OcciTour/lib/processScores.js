@@ -84,7 +84,8 @@ class Player {
 
     #addToWildCard(result){
         this.results.wildcard.push(result);
-        this.results.wildcard.sort((a, b) => a.score - b.score);
+        this.results.wildcard.sort((a, b) => b.score - a.score);
+
         if (this.results.wildcard.length > wildcard_results){
             this.results.wildcard.pop();
         }

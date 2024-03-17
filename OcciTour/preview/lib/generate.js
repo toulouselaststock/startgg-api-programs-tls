@@ -38,7 +38,7 @@ function resultsHTMl(results, data){
         res += `<li><div class = "tournament">Zone ${regions[k]} : ${results.regions[k] ? tournamentHTML(results.regions[k], data) : "Aucun"}</li>`
     }
     res += "</ul>Autres tournois (5 meilleurs) : <ul>";
-    for (let result of results.wildcard){
+    for (let result of results.wildcard.reverse()){
         res += "<li>" + tournamentHTML(result, data) + "</li>"
     }
     return res;
