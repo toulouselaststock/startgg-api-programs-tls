@@ -1,9 +1,10 @@
 import { readJSONAsync } from "../../base/include/lib/lib.js";
 import readline from "readline/promises"
-import {writeFile} from 'fs/promises'
+import fs from "fs/promises";
 
-if (process.argv.length < 4) {
-    console.error("Usage : node main.js rankingFilename outputFilename [regionMapFilename [-s]]");
+if (process.argv.length < 3) {
+    console.error("Usage : node main.js rankingFilename outputFilename [-s]");
+    process.exit(1)
 }
 
 const rl = readline.createInterface({
@@ -11,9 +12,10 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let data = await readJSONAsync(process.argv[2]);
-let regionMap = process.argv[4] ? await readJSONAsync(process.argv[3]) : {}
-let skipAlreadyKnown = process.argv[5] == "-s"
+let data = (await readJSONAsync(process.argv[2])).scores;
+let regionMap = (process.argv[3] && await fs.stat(process.argv[3]).then(stats => stats.isFile()).catch(err => {})) ? await readJSONAsync(process.argv[3]) : {}
+
+let skipAlreadyKnown = process.argv[4] == "-s"
 
 for (let player of data){
     let currentReg = regionMap[player.slug];
@@ -28,4 +30,4 @@ for (let player of data){
 
 rl.close();
 
-writeFile(process.argv[3], JSON.stringify(regionMap, null, 2));
+fs.writeFile(process.argv[3], JSON.stringify(regionMap, null, 2));
