@@ -18,7 +18,8 @@ let [template, data] = await Promise.all([
 let content = generateTable(data);
 
 let result = template.replace("<!--TEMPLATE-->", content);
-console.log(result)
 
 let outputFilename = process.argv[3] ?? new URL("./page/index.html", import.meta.url);
 fs.writeFile(outputFilename, result);
+
+console.log(" ====== GENERATED RANKING PREVIEW IN", outputFilename instanceof URL ? outputFilename.pathname : outputFilename, "========")
