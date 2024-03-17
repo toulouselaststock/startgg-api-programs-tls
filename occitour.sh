@@ -1,6 +1,6 @@
 if [[ "$1" == "discord" ]]
 then
-    ./OcciTour/scripts/discord.sh 1204905113815351316
+    ./OcciTour/scripts/discord.sh 1202647423533449297
     exit 0
 elif [[ "$1" == "upload" ]]
 then
