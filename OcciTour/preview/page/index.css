@@ -1,0 +1,139 @@
+body {
+    font-family: "Arial";
+    background-color: black;
+    color: white;
+}
+
+.logo {
+    height: 20vh;
+}
+
+.title {
+    font-size: 7.5vh;
+}
+
+th, td {
+    border: 1px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    padding: 8px;
+}
+
+td {
+    padding: 6px;
+    text-align: center;
+}
+
+table {
+    background-color: black;
+}
+
+.ranking-container {
+    margin-top: 50px;
+}
+
+.movement-column {
+    width: 25px;
+}
+
+.rank-column {
+    width: 20px;
+}
+
+.ranking-table {
+    width: 600px;
+}
+
+.tournois-comptes {
+    width: 80px;
+}
+
+.movement-cell {
+    border-right: none;
+}
+
+.rank-cell {
+    border-left: none;
+}
+
+tr.player.small_row:hover {
+    background-color: #444444aa;
+    cursor: pointer;
+}
+
+tr.player.view_row {
+    display: none;
+    opacity: 0; /* Start with opacity set to 0 */
+    transition: opacity 1s ease; /* Transition for opacity change */
+}
+
+tr.player.view_row.open {
+    display: table-row;
+    opacity: 1; /* Set opacity to 1 when open class is added */
+    transition: opacity 1s ease; /* Transition for opacity change */
+}
+
+.player_name_cell {
+    display: flex;
+}
+
+.dropdown_button_container {
+    width: 20px;
+    height: 20px;
+    background-color: grey;
+    border-radius: 3px;
+}
+
+.dropdown_button {
+    transition: all 0.3s ease;
+}
+
+.open .dropdown_button {
+    transform: rotate(90deg);
+}
+
+.player_name {
+    flex-grow: 1;
+}
+
+.player_view_cell {
+    column-span:all
+}
+
+.player_view {
+    font-family: Calibri;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    text-align: left;
+    width: 100%;
+    text-overflow: ellipsis;
+}
+
+.player_view {
+    max-width: 600px;
+}
+
+.tournament {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.inline-score {
+    font-weight: bolder;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
