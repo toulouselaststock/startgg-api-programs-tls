@@ -8,7 +8,11 @@ Mongiscard Warfare #3	17/02/2024	B	Montgiscard	HG	tournament/montgiscard-warfare
 Flamin'Goat #5	18/02/2024	B	Montpellier	HO	tournament/the-flamin-goat-5-smash-lez-x-mes-esport/event/flamin-goat-5
 Lost in the Backrooms #4	25/02/2024	C	Narbonne	AU	tournament/lost-in-the-backrooms-4/event/ultimate-singles
 Albi Smash Saga #3	02/03/2024	C	Albi	TA	tournament/albi-smash-saga-3-edition/event/bracket-1-vs-1-ultimate
-Oslow Smash League #Winter	02/03/2024	C	Beziers	AU	:./OcciTour/events/oslow.txt 
+Oslow Smash League #Winter	02/03/2024	C	Beziers	AU	:./OcciTour/events/oslow.txt
 Yggdrasil #2	09/03/2024	A	Montpellier	HO	tournament/yggdrasil-2-1/event/yggdrasil-2
-Aubracket	23/03/2024	C	Rodez	TA	tournament/aubracket/event/aubracket
+Aurabracket	23/03/2024	C	Rodez	TA	tournament/aubracket/event/aubracket
 Apollo One	07/04/2024	A	Albi	TA	tournament/apollo-one/event/bracket-1-vs-1-ultimate
+Lost in the Backrooms #5	31/03/2024	C	Narbonne	AU	tournament/lost-in-the-backrooms-5/event/ultimate-singles
+Battle Arena #12	07/04/2024	B	Nîmes	HO	tournament/battle-arena-12-esport-n-mes-arena-x-smash-lez/event/battle-arena-12
+La Castanha #3	13/04/2024	S	Toulouse	HG	tournament/la-castanha-3/event/1v1-ultimate-full-bo5
+Flamin'Goat #6	28/04/2024	S	Montpellier	HO	tournament/the-flamin-goat-6-smash-lez-x-mes-esport/event/flamin-goat-6
