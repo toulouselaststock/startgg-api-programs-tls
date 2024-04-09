@@ -1,4 +1,5 @@
 mkdir data
+mkdir out
 npm install
 cd Occitour/discord
 npm install
