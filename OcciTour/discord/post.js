@@ -30,6 +30,7 @@ let [data, client] = await Promise.all([loadInput(inputFile), initBot()])
 let scores = data.scores;
 let previousData = data.previousScores;
 
+
 text += (processList(scores, previousData));
 
 await sendMessage(client, channel, text);

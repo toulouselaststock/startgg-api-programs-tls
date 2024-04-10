@@ -56,7 +56,8 @@ function processListComp(playersList, previousPlayerList){
  * @param {any[]} playersList 
  * @param {any[]} previousPlayerList
  */
-export function processList(playersList, previousPlayerList){
+export function processList(playersList, previousPlayerList, banList){
+
     let result = "";
 
     if (previousPlayerList){

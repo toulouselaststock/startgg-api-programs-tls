@@ -1,6 +1,5 @@
-import { getEventResults } from "../base/include/getEventResults.js";
 import { getPlayerName } from "../base/include/getPlayerName.js"
-import { parseCSV, readLines } from "../base/include/lib/lib.js";
+import { parseCSV } from "../base/include/lib/lib.js";
 import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
@@ -54,6 +53,9 @@ let parser = new ArgumentsManager()
     .addOption(["-e", "--export-events"], {
         description: "Exports the list of events as JSON to the specified path"
     })
+    .addOption(["-b", "--banlist"], {
+        description: "Path to a JSON file containing a list of banned players"
+    })
     .addParameter("eventListFilename", {
         description: "Path to a file containing a list of event slugs"
     }, false)
@@ -74,7 +76,7 @@ let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename
 // Parsing arguments
 
 let args = parser.parseArguments(process.argv.slice(2));
-let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, compute_previous} = args;
+let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, compute_previous, banlist} = args;
 
 const cacheMode = {
     save: args["save-names-cache"] ?? args["names-cache"],
@@ -125,10 +127,21 @@ var events = await Promise.all(eventInfo.map(async event => Object.assign(event,
 await initPromise;
 await names_cache_promise;
 
+//=========================================================================== //
+//Loading banned players list
+let bannis = banlist ? await fs.promises.access(banlist)
+    .then(() => fs.promises.readFile(banlist))
+    .then(buf => JSON.parse(buf))
+    .catch(() => {
+        console.warn("No ban list found. You might want to update the local banned players database.")
+        return [];
+    }) : []
+
 // ========================================================================== //
 // Calculating scores
 
-let result = processResults(events, compute_previous, !!args["export-events"]);
+let result = processResults(events, bannis, compute_previous, !!args["export-events"]);
+
 
 
 // ========================================================================== //

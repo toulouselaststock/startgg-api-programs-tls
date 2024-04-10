@@ -200,10 +200,13 @@ function processStanding(scores, slug, event, placement, tier){
 /**
  * Calculates the scores for all entrants of a list of events
  * @param {any[]} events 
+ * @param {{name: string, slug: string}[]} banList 
  * @param {boolean} exclude_last_week 
  * @returns {Result<PlayerMap>} players
  */
-export function processResults(events, exclude_last_week = false, export_event_info = false){
+export function processResults(events, banList, exclude_last_week = false, export_event_info = false){
+    console.log("BAN LIST", banList)
+
     if (!tiers.loaded) {
         console.error("Tiers are not loaded yet. Call initializeTiersData() before this function.");
         return {}
@@ -273,10 +276,17 @@ export function processResults(events, exclude_last_week = false, export_event_i
             }
             let slug = (standing.entrant.participants[0].user.slug).split('/')[1];
 
-            /*
-            let player = getPlayer(result.scores, slug);
-            player.addResult(ev.region, eventData.tournament.id, standing.placement, tier);
-            */
+            let banned = false;
+            for (let player of banList){
+                if (player.slug == slug){
+                    console.log("ITSA MATCH")
+                    banned = true;
+                }
+            }
+            if (banned){
+                console.log("PLAYER WAS BANNED ABORT NOW")
+                continue;
+            }
 
             processStanding(result.scores, slug, ev, standing.placement, tier);
             if (count_in_previous){

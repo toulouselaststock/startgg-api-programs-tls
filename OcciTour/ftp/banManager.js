@@ -1,6 +1,7 @@
 import {Client} from 'basic-ftp'
 import { connect } from './lib.js';
 import fs from "fs/promises"
+import readline from "readline/promises"
 
 // ----------- CONFIG -----------------------
 
@@ -8,11 +9,6 @@ const local_filename = "out/Occitour/bannis.json"
 const remote_filename = "data/bannis.json"
 
 // ------------------------------------------
-
-if (process.argv.length < 3){
-    console.warn("Usage: node banManager.js {list | add <slug> <name>}");
-    process.exit(1);
-}
 
 let client = new Client();
 
@@ -30,14 +26,27 @@ let bannis = await fs.access(local_filename)
 
 let operation = process.argv[2];
 
-if (operation == "list"){
-    console.log("Bannis : ")
+function list(){
     for (let player of bannis){
         console.log(player.name, player.slug);
     }
+}
+
+if (operation == "list"){
+    console.log("Bannis : ")
+    list();
 } else if (operation == "add"){
     let slug = process.argv[3];
     let name = process.argv[4];
+
+    if (!slug){
+        console.log("Current ban list : ")
+        list();
+        let rl = readline.createInterface(process.stdin, process.stdout);
+        name = await rl.question("Entrez le nom/pseudo du joueur à bannir : ")
+        slug = await rl.question("Entrez le slug start.gg du joueur à bannir : ")
+        rl.close();
+    }
 
     bannis.push({slug, name});
 
