@@ -1,11 +1,5 @@
+import { regions } from "../../lib/common.js";
 import {playersListToMap} from "./util.js"
-
-export const regions = {
-    "HG": "Mercure",
-    "TA": "Tantale",
-    "HO": "Helium",
-    "AU": "Or"
-}
 
 /**
  * @param {number} placement 

@@ -2,6 +2,7 @@ import { Client } from "discord.js";
 import { relurl } from '../../../base/include/lib/dirname.js'
 import { sendSeparateMessages } from "@twilcynder/discord-util"
 import fs from 'fs';
+import { makeQualifCalculator, qualifEmoji } from "./rankingUtil.js";
 
 /**
  * Converts an ordered players list to a map associating each slug with the rank
@@ -33,10 +34,12 @@ function getRankingMovementEmoji(newRank, oldRank){
  * @param {any[]} playersList 
  * @param {any[]} previousPlayerList
  */
-function processListComp(playersList, previousPlayerList){
+function processListComp(playersList, previousPlayerList, regionsMap){
     let previousRanks = playersListToMap(previousPlayerList);
 
     let result = "";
+
+    let getQualifLevel = regionsMap ? makeQualifCalculator(regionsMap) : null;
 
     for (let i = 0; i < playersList.length; i++){
         let {name, score, tournamentNumber, slug} = playersList[i];
@@ -46,7 +49,12 @@ function processListComp(playersList, previousPlayerList){
         let prevRank = previousRanks[slug];
         console.log(name, i, prevRank);
 
-        result += `${i + 1}. ${getRankingMovementEmoji(i, prevRank)} **${name}** : ${score} (${tournamentNumber} tournoi${tournamentNumber > 1 ? "s" : ""})\n`;
+        let emoji = ""
+        if (getQualifLevel){
+            emoji = " " + qualifEmoji(getQualifLevel(playersList[i]));
+        }
+
+        result += `${i + 1}. ${getRankingMovementEmoji(i, prevRank)} **${name}** : ${score}${emoji} (${tournamentNumber} tournoi${tournamentNumber > 1 ? "s" : ""})\n`;
     }
     return result;
 }
@@ -56,12 +64,12 @@ function processListComp(playersList, previousPlayerList){
  * @param {any[]} playersList 
  * @param {any[]} previousPlayerList
  */
-export function processList(playersList, previousPlayerList, banList){
+export function processList(playersList, previousPlayerList, regionsMap){
 
     let result = "";
 
     if (previousPlayerList){
-        return processListComp(playersList, previousPlayerList);
+        return processListComp(playersList, previousPlayerList, regionsMap);
     }
 
     for (let i = 0; i < playersList.length; i++){

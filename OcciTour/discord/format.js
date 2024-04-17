@@ -3,11 +3,11 @@ import { processList } from "./lib/functions.js";
 import fs from 'fs/promises';
 import { loadInput } from "./lib/loadInput.js";
 
-let [inputFile, outputFile, messageFilename, previousDataFilename, props] = parseArguments(process.argv.slice(2),
+let [inputFile, outputFile, messageFilename, regionsFilename, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
     new SingleOptionParser("-o"),
     new SingleOptionParser("-m"),
-    new SingleOptionParser("-p"),
+    new SingleOptionParser("-r"),
     new PropertiesParser()
 )
 
@@ -21,15 +21,20 @@ if (messageFilename){
     text = message + "\n";
 }
 
+let regions = undefined;
+if (regionsFilename){
+    regions = await fs.readFile(regionsFilename).then(buf => buf.toString()).then(json => JSON.parse(json));
+}
+
+console.log(regions);
+
 console.log("Waiting for result ...")
 let data = await loadInput(inputFile);
 
-let previousData;
-if (previousDataFilename){
-    previousData = await fs.readFile(previousDataFilename).then(buf => buf.toString()).then(JSON.parse);
-}
+let scores = data.scores;
+let previousData = data.previousScores;
 
-text += processList(data, previousData);
+text += processList(scores, previousData, regions);
 
 if (outputFile){
     fs.writeFile("./out/" + outputFile, text);
