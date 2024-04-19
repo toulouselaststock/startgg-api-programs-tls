@@ -51,6 +51,39 @@ function movementHTML(currentRank, slug, previousRanksMap){
     return `<div class = "${cssClass}">(${text})</div>`
 }
 
+function qualifHTML(qualifLevel, player){
+    console.log(qualifLevel, player);
+
+    switch (qualifLevel){
+        case 1:
+            return "Qualifié.e à La Finale : Meilleur.e participant.e de la région " + regions[player.region ?? "?"];
+        case 2: 
+            return "Qualifié.e à La Finale ";
+        case 3:
+            return "Qualifié.e au Play-In de La Finale : 2ème meilleur.e participant.e de la région " + regions[player.region ?? "?"];
+        case 4:
+            return "Qualifié.e au Play-In de La Finale";
+    }
+
+    return "";
+}
+
+let qualifClassNames = ["nothing", "main-event", "main-event", "play-in", "play-in", "ineligible"];
+
+export function qualifEmoji(qualifLevel){
+    switch(qualifLevel){
+        case 1:
+        case 2:
+            return "✅"
+        case 3:
+        case 4:
+            return "☑️"
+        default:
+            return "";
+    }
+}
+
+
 export function generateTable(data){
     if (!data){
         console.error("Data not found !");
@@ -58,26 +91,29 @@ export function generateTable(data){
         let result = ""
         let scores = data.scores;
         let previousRanksMap = playersListToMap(data.previousScores);
-
+ 
         for (let i = 0; i < scores.length; i++){
             let player = scores[i];
             if (player.score < 1) break;
             result += `
-                <tr class = "player small_row">
-                    <td class = "movement-cell">${previousRanksMap ? movementHTML(i, player.slug, previousRanksMap) : ""}</td>
+                <tr class = "player small_row qualif-${qualifClassNames[player.qualifLevel ?? 0]} ">
+                    <td class = "movement-cell">${movementHTML(i, player.slug, previousRanksMap)}</td>
                     <td class = "rank-cell">${i + 1}</td>
                     <td class = "player_name_cell">
                         <div class = "dropdown_button_container"><div class = "dropdown_button">►</div></div>
                         <div class = "player_name">${player.name}</div>
+                        <div class = "qualif-emoji">${qualifEmoji(player.qualifLevel)}</div>
                     </td>
-                    <td>${player.score}</td>
-                    <td>${player.tournamentNumber}</td>
+                    <td class = "score">${player.score}</td>
+                    <td class = "tnum ">${player.tournamentNumber}</td>
                 </tr>
                 <tr class = "player view_row">
                     <td colspan = "5" class = "player_view_cell">
                         <div class = "player_view">
                             Score total : ${player.score}<br>
+                            ${player.qualifLevel ? qualifHTML(player.qualifLevel, player) + "<br>" : ""}
                             ${resultsHTMl(player.results, data)}
+
                         </div>
                     </td>
                 </tr>

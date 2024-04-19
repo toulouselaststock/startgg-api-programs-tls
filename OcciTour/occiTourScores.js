@@ -233,14 +233,7 @@ function makeFinalJSON(scores){
 let resultString;
 
 if (outputFormat == "csv"){
-    resultString = "";
-    for (let player of players){
-        if (outputContent.tournamentNumber){
-            resultString += player.name + "\t" + player.score + "\t" + countResults(player.results) + '\n';
-        } else {
-            resultString += player.name + "\t" + player.score + '\n';
-        }
-    }
+    //DEPRECATED AS FUCK
 } else {
     let finalJSON = {
         tournaments: outputContent.resultsDetail ? result.tournaments : undefined,
