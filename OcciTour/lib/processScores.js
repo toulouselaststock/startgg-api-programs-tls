@@ -1,7 +1,7 @@
 import {parse as parseCSV} from 'csv-parse';
 import {createReadStream} from 'fs';
 import {relurl} from '../../base/include/lib/dirname.js  ';
-import { generateUniqueID } from '../../base/include/lib/lib.js';
+import {generateUniqueID} from '../../base/include/lib/lib.js';
 
 const regions = ["HG", "TA", "HO", "AU"];
 const wildcard_results = 5;
@@ -13,10 +13,11 @@ const tierPointsFilename = "../tierPoints.csv";
  * @type {Tier[]}
  */
 const tiers = [
-    {name: "S", minimum: 113},
-    {name: "A", minimum: 81},
-    {name: "B", minimum: 57},
-    {name: "C", minimum: 0}
+    {name: "S+", minimum: 145},
+    {name: "S",  minimum: 113},
+    {name: "A",  minimum: 81},
+    {name: "B",  minimum: 57},
+    {name: "C",  minimum: 0}
 ]
 
 export async function initializeTiersData(){
@@ -74,7 +75,7 @@ function Result(tournamentName, placement, score){
     return {tournamentName, placement, score};
 }
 
-class Player {
+export class Player {
     constructor(){
         this.results = {
             regions: {}, 

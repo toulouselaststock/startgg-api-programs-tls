@@ -4,9 +4,10 @@ import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
-import fs from 'fs'
+import fs, { copyFileSync } from 'fs'
 import { NamesCache } from "./lib/namesCache.js";
 import { loadEvent } from "./lib/loadEvents.js";
+import { makeQualifCalculator } from "./lib/qualifUtil.js";
 
 // =================================================================== //
 // Parser Config
@@ -49,6 +50,9 @@ let parser = new ArgumentsManager()
     .addSwitch(["-P", "--previous"], {
         description: "Additionally computes the \"previous\" ranking, i.e. the ranking without the last week (useful to make ranking diffs)",
         dest: "compute_previous"
+    })
+    .addOption(["-q", "--compute-qualif"], {
+        description: "Compute who is qualified for La Finala ; must be followed by either \"-\" or the path to a JSON file mapping user slugs to a Occi'Tour Region."
     })
     .addOption(["-e", "--export-events"], {
         description: "Exports the list of events as JSON to the specified path"
@@ -142,10 +146,8 @@ let bannis = banlist ? await fs.promises.access(banlist)
 
 let result = processResults(events, bannis, compute_previous, !!args["export-events"]);
 
-
-
 // ========================================================================== //
-// Processing results into sorted player data
+// Processing results into sorted player data with qualif data
 
 function getName(slug){
     return useCache ? names_cache.getName(client, slug, limiter) : getPlayerName(client, slug, limiter, true);
@@ -182,14 +184,27 @@ async function processPlayersList(players){
     result.sort((a, b) => b.score - a.score);
     return result;
 }
-
+limiter.stop();
 
 let sortedResult = {
     scores: await processPlayersList(result.scores),
     previousScores: result.previousScores ? await processPlayersList(result.previousScores) : undefined
 };
 
-limiter.stop();
+if (args["compute-qualif"]){
+    let regionsFilename = args["compute-qualif"];
+    let regionsMap = (regionsFilename == "-") ? 
+        {} : 
+        await fs.promises.readFile(regionsFilename)
+            .then(buf => JSON.parse(buf));
+        
+
+    let getQualif = makeQualifCalculator(regionsMap);
+    for (let player of sortedResult.scores){
+        let qualifLevel = getQualif(player);
+        player.qualifLevel = qualifLevel;
+    }
+}
 
 // ========================================================================== //
 // Producing output
@@ -210,7 +225,8 @@ function makeFinalJSON(scores){
         name: player.name,
         score: player.score,
         tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
-        results: outputContent.resultsDetail ? player.results : undefined
+        results: outputContent.resultsDetail ? player.results : undefined,
+        qualifLevel: player.qualifLevel
     }));
 }
 
