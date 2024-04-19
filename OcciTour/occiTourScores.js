@@ -226,7 +226,7 @@ function makeFinalJSON(scores){
         score: player.score,
         tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
         results: outputContent.resultsDetail ? player.results : undefined,
-        qualifLevel: player.qualifLevel
+        qualifLevel: !!player.qualifLevel ? player.qualifLevel : undefined
     }));
 }
 
