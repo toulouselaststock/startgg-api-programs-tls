@@ -202,6 +202,11 @@ if (args["compute-qualif"]){
     let getQualif = makeQualifCalculator(regionsMap);
     for (let player of sortedResult.scores){
         let qualifLevel = getQualif(player);
+
+        if (qualifLevel == 1 || qualifLevel == 3){
+            player.region = regionsMap[player.slug];
+        }
+
         player.qualifLevel = qualifLevel;
     }
 }
@@ -226,7 +231,8 @@ function makeFinalJSON(scores){
         score: player.score,
         tournamentNumber: outputContent.tournamentNumber ? countResults(player.results) : undefined,
         results: outputContent.resultsDetail ? player.results : undefined,
-        qualifLevel: !!player.qualifLevel ? player.qualifLevel : undefined
+        qualifLevel: !!player.qualifLevel ? player.qualifLevel : undefined,
+        region: player.region
     }));
 }
 
