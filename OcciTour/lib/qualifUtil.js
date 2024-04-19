@@ -22,32 +22,32 @@ export function makeQualifCalculator(regionsMap){
 
         let region = regionsMap[player.slug];
         if (!regionalBestTaken[region] && regions[region]){
-            console.log("REGIONAL BEST WAS NOT TAKEN")
+            //console.log("REGIONAL BEST WAS NOT TAKEN")
             regionalBestTaken[region] = true;
             return 1;
         }
 
         let isRegional2nd = false;
         if (!regional2ndTaken[region] && regions[region]){
-            console.log("REGIONAL 2ND WAS NOT TAKEN")
+            //console.log("REGIONAL 2ND WAS NOT TAKEN")
             regional2ndTaken[region] = true;
             isRegional2nd = true;
         }
 
         if (MEQualifs < 8){
-            console.log("THERE WAS A SPOT IN MAIN EVENT", MEQualifs);
+            //console.log("THERE WAS A SPOT IN MAIN EVENT", MEQualifs);
             MEQualifs++;
             return 2;
         }
 
         if (isRegional2nd){
-            console.log("QUALIFIED TO PLAY IN BECAUSE REGIONAL 2ND")
+            //console.log("QUALIFIED TO PLAY IN BECAUSE REGIONAL 2ND")
             PIQualifs++;
             return 3;
         }
 
         if (PIQualifs < 4 + Object.values(regional2ndTaken).length){
-            console.log("THERE WAS A SPOT IN QUALIFS")
+            //console.log("THERE WAS A SPOT IN QUALIFS")
             PIQualifs++;
             return 4;
         }
