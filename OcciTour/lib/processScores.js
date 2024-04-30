@@ -252,6 +252,8 @@ export function processResults(events, banList, exclude_last_week = false, expor
                 if (compareDates(monday, lastMonday)){
                     console.log("Not counting in previous because excluding last week");
                     count_in_previous = false;
+
+                    if (export_event_info) ev.new = true;
                 } else {
                     count_in_previous = true;
                 }
