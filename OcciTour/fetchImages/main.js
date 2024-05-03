@@ -2,7 +2,7 @@ import fs from 'fs';
 import { getTournamentLogo } from '../../base/include/getTournamentImage.js';
 import { client } from '../../base/include/lib/common.js';
 import { StartGGDelayQueryLimiter } from '../../base/include/lib/queryLimiter.js';
-import { getTournamentSlugFromEventSlug } from '../../base/include/lib/tournamentUtil.js';
+import { extractSlug, getTournamentSlugFromEventSlug } from '../../base/include/lib/tournamentUtil.js';
 import {extension} from 'mime-types'
 
 if (process.argv.length < 3){
@@ -19,7 +19,7 @@ let limiter = new StartGGDelayQueryLimiter();
 
 let imgInfos = await Promise.all(data.map( async event => {
     /** @type {string} */
-    let slug = event.slug;
+    let slug = extractSlug(event.slug);
 
     if (!slug || slug.startsWith(":")) return null;
     try {
