@@ -108,7 +108,7 @@ if (silent) {
 // Loading events
 
 var eventInfo = parseCSV(fs.readFileSync(eventListFilename).toString(), {separator: "\t"})
-    .map(line => ({date: line[1], thTier: line[2], city: line[3], region: line[4], slug: line[5]}))
+    .map(line => ({date: line[1], thTier: line[2], city: line[3], region: line[4], slug: extractSlug(line[5])}))
 
     console.log(eventInfo)
 
@@ -128,7 +128,7 @@ let limiter = new StartGGDelayQueryLimiter();
 
 let initPromise = initializeTiersData();
 
-var events = await Promise.all(eventInfo.map(async event => Object.assign(event, {data: await loadEvent(client, extractSlug(event.slug), limiter)})));
+var events = await Promise.all(eventInfo.map(async event => Object.assign(event, {data: await loadEvent(client, event.slug, limiter)})));
 await initPromise;
 await names_cache_promise;
 
