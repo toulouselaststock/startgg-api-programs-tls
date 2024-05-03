@@ -8,6 +8,7 @@ import fs, { copyFileSync } from 'fs'
 import { NamesCache } from "./lib/namesCache.js";
 import { loadEvent } from "./lib/loadEvents.js";
 import { makeQualifCalculator } from "./lib/qualifUtil.js";
+import { extractSlug } from "../base/include/lib/tournamentUtil.js";
 
 // =================================================================== //
 // Parser Config
@@ -127,7 +128,7 @@ let limiter = new StartGGDelayQueryLimiter();
 
 let initPromise = initializeTiersData();
 
-var events = await Promise.all(eventInfo.map(async event => Object.assign(event, {data: await loadEvent(client, event.slug, limiter)})));
+var events = await Promise.all(eventInfo.map(async event => Object.assign(event, {data: await loadEvent(client, extractSlug(event.slug), limiter)})));
 await initPromise;
 await names_cache_promise;
 

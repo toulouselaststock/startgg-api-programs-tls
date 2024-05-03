@@ -52,7 +52,6 @@ function movementHTML(currentRank, slug, previousRanksMap){
 }
 
 function qualifHTML(qualifLevel, player){
-    console.log(qualifLevel, player);
 
     switch (qualifLevel){
         case 1:
