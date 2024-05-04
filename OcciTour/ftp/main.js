@@ -29,7 +29,15 @@ if (upload){
     client.trackProgress(uploadTracker(countFiles(local_dir)))
     await client.uploadFromDir(local_dir, remote_dir);
 } else {
-    await client.downloadToDir(local_dir, remote_dir);
+    while (true){
+        try {
+            await client.downloadToDir(local_dir, remote_dir);
+            break;
+        } catch (err){
+            console.error("Failed to download : ", err);
+        }
+    }
+    
 }
 
 console.log(`Finished ${operation}ing`);
