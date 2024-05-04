@@ -40,10 +40,10 @@ async function async_retry(f, retries = 1){
             console.error("Failed to download : ", err);
             tries++;
             if (tries >= retries){
-                console.log("MAX NUMBER OF TRIES REACHED.");
+                console.error("MAX NUMBER OF TRIES REACHED.");
                 break;
             }
-            console.log("--------- RETRYING --------")
+            console.error("--------- RETRYING --------")
         }
     }
 }
