@@ -2,10 +2,11 @@ import {Client} from 'basic-ftp'
 import { connect, countFiles, uploadTracker } from './lib.js';
 import { ArgumentsManager } from '@twilcynder/arguments-parser';
 
-let {operation, path, password} = new ArgumentsManager()
+let {operation, localpath, remotepath, password} = new ArgumentsManager()
     .addParameter("operation", {description: "download | upload"})
-    .addOption(["-p", "--path"], {description: "Path of the folder to dl/ul, relative to both out/Occitour/ locally and data/ remotely.", default:""}, true)
-    .addOption(["-P", "--password"], {description: "Password to use for the FTP server. MEANS TYPING IT IN CLEAR. SHOULD NOT BE USED UNLESS YOU ARE GITHUB ACTIONS."}, true)
+    .addOption(["-l", "--localpath"], {description: "Path of the folder to dl to/ul from.", default:"./data/Occitour"}, true)
+    .addOption(["-r", "--remotepath"], {description: "Path of the folder to dl from/ul to.", default:"./data/Occitour"}, true)
+    .addOption(["-p", "--password"], {description: "Password to use for the FTP server. MEANS TYPING IT IN CLEAR. SHOULD NOT BE USED UNLESS YOU ARE GITHUB ACTIONS."}, true)
     .parseProcessArguments()
 
 if (operation != "upload"){
@@ -19,8 +20,8 @@ await connect(client, password);
 console.log("Connected !");
 
 let upload = operation == "upload";
-let remote_dir = "data/" + path;
-let local_dir  = "out/Occitour/" + path
+let remote_dir = remotepath;
+let local_dir  = localpath
 
 
 if (upload){
