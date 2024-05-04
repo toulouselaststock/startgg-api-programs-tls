@@ -1,2 +1,2 @@
 mkdir -p out/occitour-logos
-node OcciTour/fetchImages/main.js out/Occitour/events.json
+node OcciTour/fetchImages/main.js out/Occitour/results/events.json
