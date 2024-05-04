@@ -1,0 +1,1 @@
+node OcciTour/ftp/main.js upload -l out/Occitour/results/ -r data/results/ -p "$1"

@@ -15,8 +15,9 @@ if (operation != "upload"){
 
 let client = new Client();
 
-await connect(client, password);
 
+console.log("Connecting to the server ...");
+await connect(client, password);
 console.log("Connected !");
 
 let upload = operation == "upload";

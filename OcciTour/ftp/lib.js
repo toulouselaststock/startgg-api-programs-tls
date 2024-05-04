@@ -66,7 +66,7 @@ export function uploadTracker(totalfiles){
 }
 
 export async function connect(client, password){
-    password = password ?? await hiddenQuestion("Mot de passe cloud : "); 
+    password = password || await hiddenQuestion("Mot de passe cloud : "); 
 
     try {
         return await client.access({
