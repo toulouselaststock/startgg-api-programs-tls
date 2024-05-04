@@ -5,18 +5,19 @@ import readline from "readline/promises"
 
 // ----------- CONFIG -----------------------
 
-const local_filename = "out/Occitour/bannis.json"
-const remote_filename = "data/bannis.json"
+const local_filename = "data/Occitour/meta/bannis.json"
+const remote_filename = "data/meta/bannis.json"
 
 // ------------------------------------------
 
 let client = new Client();
 
-await connect(client);
+console.log("Updating the banlist from server ...");
 
+await connect(client);
 await client.downloadTo(local_filename, remote_filename);
 
-console.log("Successfully updated the local ban database from server.")
+console.log("Successfully updated the local ban database from server.");
 
 let bannis = await fs.access(local_filename)
     .then(() => fs.readFile(local_filename))
@@ -34,13 +35,15 @@ function list(){
 
 if (operation == "list"){
     console.log("Bannis : ")
+    console.log("(Nom) (slug)");
     list();
 } else if (operation == "add"){
     let slug = process.argv[3];
     let name = process.argv[4];
 
     if (!slug){
-        console.log("Current ban list : ")
+        console.log("Current ban list : ");
+        console.log("(Nom) (slug)");
         list();
         let rl = readline.createInterface(process.stdin, process.stdout);
         name = await rl.question("Entrez le nom/pseudo du joueur à bannir : ")
