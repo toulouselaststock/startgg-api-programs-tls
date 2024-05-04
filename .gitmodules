@@ -1,4 +1,4 @@
 [submodule "base"]
 	path = base
-	url = https://gitlab.com/twilcynder/startgg-api-programs
+	url = https://github.com/twilcynder/startgg-api-programs
 	branch = main
