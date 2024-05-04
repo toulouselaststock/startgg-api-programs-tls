@@ -22,9 +22,9 @@ let upload = operation == "upload";
 let remote_dir = "data/" + path;
 let local_dir  = "out/Occitour/" + path
 
-client.trackProgress(uploadTracker(countFiles(local_dir)))
 
 if (upload){
+    client.trackProgress(uploadTracker(countFiles(local_dir)))
     await client.uploadFromDir(local_dir, remote_dir);
 } else {
     await client.downloadToDir(local_dir, remote_dir);
