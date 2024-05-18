@@ -1,0 +1,1 @@
+./OcciTour/scripts/update.sh data/Occitour/events.json
