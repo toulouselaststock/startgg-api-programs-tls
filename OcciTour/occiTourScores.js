@@ -4,7 +4,7 @@ import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/common.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
-import fs, { copyFileSync } from 'fs'
+import fs from 'fs'
 import { NamesCache } from "./lib/namesCache.js";
 import { loadEvent } from "./lib/loadEvents.js";
 import { makeQualifCalculator } from "./lib/qualifUtil.js";
@@ -20,7 +20,10 @@ let parser = new ArgumentsManager()
         dest: "outputFormat",
         description: "The output format. Either json (default) or csv"
     })
-    .addOption(["-o", "--output_file"],{
+    .addOption(["-i", "--input_format"], {
+        description: "The event list format. Either csv (default) or json"
+    })
+    .addOption(["-o", "--output_file"], {
         dest: "outputfile",
         description: "A file to save the output to. If not specified, the output will be sent to the std output."
     })
@@ -81,7 +84,7 @@ let [outputFormat, outputfile, dataOptions, silent, printData, eventListFilename
 // Parsing arguments
 
 let args = parser.parseArguments(process.argv.slice(2));
-let {outputFormat, outputfile, dataOptions, silent, printData, eventListFilename, compute_previous, banlist} = args;
+let {outputFormat, input_format, outputfile, dataOptions, silent, printData, eventListFilename, compute_previous, banlist} = args;
 
 const cacheMode = {
     save: args["save-names-cache"] ?? args["names-cache"],
@@ -106,11 +109,24 @@ if (silent) {
 
 // =================================================================== //
 // Loading events
+var eventTable = [];
 
-var eventInfo = parseCSV(fs.readFileSync(eventListFilename).toString(), {separator: "\t"})
-    .map(line => ({date: line[1], thTier: line[2], city: line[3], region: line[4], slug: extractSlug(line[5])}))
+if (input_format == "json"){
+    let json = JSON.parse(fs.readFileSync(eventListFilename).toString());
 
-    console.log(eventInfo)
+    try {
+        eventTable = json.results[0].result.rawData;
+    } catch {
+        console.error("Event list JSON doesn't have the expected structure (jroehl/gsheet.action output)");
+        process.exit(1);
+    }
+} else { //csv
+    eventTable = parseCSV(fs.readFileSync(eventListFilename).toString(), {separator: "\t"});
+}
+
+var eventInfo = eventTable.map(line => ({date: line[1], thTier: line[2], city: line[3], region: line[4], slug: extractSlug(line[5])}))
+
+console.log(eventInfo)
 
 // ========================================================================== //
 // Loading names cache
