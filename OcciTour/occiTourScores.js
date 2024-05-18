@@ -101,6 +101,18 @@ let outputContent = dataOptions ? {
     "slug": dataOptions.includes("u")
 } : {};
 
+if (!eventListFilename){
+    console.error("Invalid event list filename");
+    process.exit(1);
+}
+
+if (!input_format){
+    if (eventListFilename.endsWith(".json")){
+        input_format = "json";
+    } else if (eventListFilename.endsWith(".txt")){
+        input_format = "csv";
+    }
+}
 
 let write = process.stdout.write;
 if (silent) {
