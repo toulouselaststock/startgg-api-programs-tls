@@ -1,6 +1,6 @@
 import { initBot, processList, sendMessage } from './lib/functions.js';
 import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynder/arguments-parser";
-import { loadInput } from "./lib/loadInput.js";
+import { loadInput } from "../../base/include/lib/loadInput.js";
 import fs from 'fs/promises'
 
 let defaultChannel = "1202647423533449297";
