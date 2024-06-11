@@ -1,7 +1,7 @@
 import { getPlayerName } from "../base/include/getPlayerName.js"
 import { parseCSV } from "../base/include/lib/lib.js";
 import { ArgumentsManager} from "@twilcynder/arguments-parser";
-import { client } from "../base/include/lib/common.js";
+import { client } from "../base/include/lib/client.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
 import { StartGGDelayQueryLimiter } from "../base/include/lib/queryLimiter.js"
 import fs from 'fs'

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { getTournamentLogo } from '../../base/include/getTournamentImage.js';
-import { client } from '../../base/include/lib/common.js';
+import { client } from '../../base/include/lib/client.js';
 import { StartGGDelayQueryLimiter } from '../../base/include/lib/queryLimiter.js';
 import { extractSlug, getTournamentSlugFromEventSlug } from '../../base/include/lib/tournamentUtil.js';
 import {extension} from 'mime-types'
