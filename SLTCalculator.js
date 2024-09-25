@@ -1,4 +1,4 @@
-import {client} from './base/include/lib/common.js'
+import {client} from './base/include/lib/client.js'
 import {readJSONAsync} from './base/include/lib/lib.js'
 import fs from 'fs';
 

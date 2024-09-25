@@ -1,7 +1,7 @@
 import { PropertiesParser, SingleOptionParser, parseArguments } from "@twilcynder/goombalib-js";
 import { processList } from "./lib/functions.js";
 import fs from 'fs/promises';
-import { loadInput } from "./lib/loadInput.js";
+import { loadInput } from "../../base/include/lib/loadInput.js";
 
 let [inputFile, outputFile, messageFilename, regionsFilename, props] = parseArguments(process.argv.slice(2),
     new SingleOptionParser("-f"),
