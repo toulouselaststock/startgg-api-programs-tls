@@ -155,7 +155,7 @@ if (cacheMode.load){
 // ========================================================================== //
 // Loading events and pts point Tiers
 
-let limiter = new StartGGDelayQueryLimiter();
+let limiter = /*new StartGGDelayQueryLimiter();*/ null;
 
 let initPromise = initializeTiersData();
 
@@ -216,12 +216,14 @@ async function processPlayersList(players){
     result.sort((a, b) => b.score - a.score);
     return result;
 }
-limiter.stop();
+//limiter.stop();
 
 let sortedResult = {
     scores: await processPlayersList(result.scores),
     previousScores: result.previousScores ? await processPlayersList(result.previousScores) : undefined
 };
+
+console.log("------ Finished processing data ------");
 
 if (args["compute-qualif"]){
     let regionsFilename = args["compute-qualif"];

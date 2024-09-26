@@ -22,7 +22,8 @@ SHIELD Break #27	09/06/2024	C	Montauban	TA	tournament/s-h-i-e-l-d-break-27/event
 Le Parthénon #3	15/06/2024	S	Toulouse	HG	tournament/le-parthenon-3/event/1v1-ultimate-full-bo5
 Yggdrasil #3	22/06/2024	S	Montpellier	HO	https://www.start.gg/tournament/yggdrasil-3-1/event/yggdrasil-3
 Oslow Smash League #Spring	06/07/2024	S	Beziers	AU	https://www.start.gg/tournament/oslow-smash-league-spring-by-soci-t-g-n-rale/event/oslow-smash-league-spring-by-societe-generale-courtois
-IMPACT	05/10/2024	B	Nîmes	AU	https://start.gg/impact01
-S.H.I.E.L.D. Break #30	06/10/2024	B	Montauban	TA	https://www.start.gg/tournament/s-h-i-e-l-d-break-30/details
-Le Retour du Roi	12/10/2024	B	Carcassonne	AU	https://www.start.gg/tournament/le-retour-du-roi-1/details
-Flamin'Goat #7	13/10/2024	S	Montpellier	HO	https://www.start.gg/tournament/the-flamin-goat-7-smash-lez-x-mes-esport
+MSU SunBreak	10/09/2024	A	Montauban	TA	https://www.start.gg/tournament/msu-sunbreak/event/1-vs-1-ultimate
+IMPACT	05/10/2024	B	Nîmes	AU	https://www.start.gg/tournament/l-impact-by-ufolep-30/event/ultimate-singles
+S.H.I.E.L.D. Break #30	06/10/2024	B	Montauban	TA	https://www.start.gg/tournament/s-h-i-e-l-d-break-30/event/s-h-i-e-l-d-break
+Le Retour du Roi	12/10/2024	B	Carcassonne	AU	https://www.start.gg/tournament/le-retour-du-roi-1/event/ultimate-singles-1v1
+Flamin'Goat #7	13/10/2024	S	Montpellier	HO	https://www.start.gg/tournament/the-flamin-goat-7-smash-lez-x-mes-esport/event/flamin-goat-7
