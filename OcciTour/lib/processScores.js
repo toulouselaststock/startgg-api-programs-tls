@@ -1,7 +1,7 @@
 import {parse as parseCSV} from 'csv-parse';
 import {createReadStream} from 'fs';
 import {relurl} from '../../base/include/lib/dirname.js  ';
-import {generateUniqueID} from '../../base/include/lib/lib.js';
+import { generateUniqueID } from '../../base/include/lib/jsUtil.js';
 
 const regions = ["HG", "TA", "HO", "AU"];
 const wildcard_results = 5;

@@ -1,5 +1,5 @@
 import { getEventResults } from "../../base/include/getEventResults.js";
-import { readLinesAsync } from "../../base/include/lib/lib.js";
+import { readLinesAsync } from "../../base/include/lib/jsUtil.js";
 
 /**
  * 

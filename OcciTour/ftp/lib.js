@@ -70,9 +70,9 @@ export async function connect(client, password){
 
     try {
         return await client.access({
-            host: "files.000webhost.com",
+            host: "ftpupload.net",
             port: 21,
-            user: "twilcyndertest",
+            user: "if0_37379590",
             password
         })
     } catch (err){

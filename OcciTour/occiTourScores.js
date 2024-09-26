@@ -1,5 +1,5 @@
 import { getPlayerName } from "../base/include/getPlayerName.js"
-import { parseCSV } from "../base/include/lib/lib.js";
+import { parseCSV } from "../base/include/lib/jsUtil.js";
 import { ArgumentsManager} from "@twilcynder/arguments-parser";
 import { client } from "../base/include/lib/client.js";
 import { initializeTiersData, processResults } from "./lib/processScores.js";
