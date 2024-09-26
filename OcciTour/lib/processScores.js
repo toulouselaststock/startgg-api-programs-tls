@@ -227,6 +227,11 @@ export function processResults(events, banList, exclude_last_week = false, expor
     for (let ev of events){
         let eventData = ev.data;
 
+        if (!eventData){
+            console.warn(`No data for event ${ev.name}`);
+            continue;
+        }
+
         eventData.tournament.id = eventData.tournament.id ?? generateUniqueID();
         result.tournaments[eventData.tournament.id] = eventData.tournament.name;
 
