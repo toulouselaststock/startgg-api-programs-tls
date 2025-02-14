@@ -1,1 +1,1 @@
-node OcciTour/ftp/main.js upload -l data/Occitour/meta/ -r htdocs/OcciTour/meta/ -p "$1"
+node OcciTour/ftp/main.js upload -l data/OcciTour/meta/ -r htdocs/OcciTour/meta/ -p "$1"

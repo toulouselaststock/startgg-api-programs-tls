@@ -6,8 +6,8 @@ const DEFAULT_TRIES = 1;
 
 let {operation, localpath, remotepath, password, tries} = new ArgumentsManager()
     .addParameter("operation", {description: "download | upload"})
-    .addOption(["-l", "--localpath"], {description: "Path of the folder to dl to/ul from.", default:"./data/Occitour"}, true)
-    .addOption(["-r", "--remotepath"], {description: "Path of the folder to dl from/ul to.", default:"./data/Occitour"}, true)
+    .addOption(["-l", "--localpath"], {description: "Path of the folder to dl to/ul from.", default:"./data/OcciTour"}, true)
+    .addOption(["-r", "--remotepath"], {description: "Path of the folder to dl from/ul to.", default:"./htdocs/data/"}, true)
     .addOption(["-p", "--password"], {description: "Password to use for the FTP server. MEANS TYPING IT IN CLEAR. SHOULD NOT BE USED UNLESS YOU ARE GITHUB ACTIONS."}, true)
     .addOption(["-t", "--tries"], {description: "How many retries", type: "number"})
     .parseProcessArguments()

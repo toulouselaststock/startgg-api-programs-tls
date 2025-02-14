@@ -5,8 +5,8 @@ import readline from "readline/promises"
 
 // ----------- CONFIG -----------------------
 
-const local_filename = "data/Occitour/meta/bannis.json"
-const remote_filename = "data/meta/bannis.json"
+const local_filename = "data/OcciTour/meta/bannis.json"
+const remote_filename = "htdocs/OcciTour/meta/bannis.json"
 
 // ------------------------------------------
 

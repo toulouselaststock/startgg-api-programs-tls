@@ -1,4 +1,4 @@
-mkdir -p data/Occitour/meta
+mkdir -p data/OcciTour/meta
 
 if [[ "$1" == "view" ]]
 then

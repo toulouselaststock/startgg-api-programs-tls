@@ -1,1 +1,1 @@
-./OcciTour/scripts/update.sh data/Occitour/events.json
+./OcciTour/scripts/update.sh data/OcciTour/events.json

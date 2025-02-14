@@ -1,1 +1,1 @@
-./OcciTour/scripts/update.sh OcciTour/events.txt
+./OcciTour/scripts/update.sh data/OcciTour/events.csv

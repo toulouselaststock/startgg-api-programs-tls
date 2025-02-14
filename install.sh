@@ -1,7 +1,7 @@
 mkdir -p data
 mkdir -p out    
 npm install
-cd Occitour/discord
+cd OcciTour/discord
 npm install
 cd ../preview
 npm install
