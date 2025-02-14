@@ -22,7 +22,7 @@ console.log("Successfully updated the local ban database from server.");
 let bannis = await fs.access(local_filename)
     .then(() => fs.readFile(local_filename))
     .then(buf => JSON.parse(buf))
-    .catch(() => ({}));
+    .catch(() => ([]));
 
 
 let operation = process.argv[2];
